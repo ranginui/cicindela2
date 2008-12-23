@@ -1,6 +1,6 @@
 package Cicindela::Handlers::Recommend;
 
-# $Id: Recommend.pm 152373 2008-12-23 16:00:16Z i-ihara $
+# $Id$
 
 use strict;
 use mod_perl;

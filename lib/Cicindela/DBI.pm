@@ -1,6 +1,6 @@
 package Cicindela::DBI;
 
-# $Id: DBI.pm 150453 2008-12-11 01:30:39Z i-ihara $
+# $Id$
 
 use strict;
 use base qw(Ima::DBI);
