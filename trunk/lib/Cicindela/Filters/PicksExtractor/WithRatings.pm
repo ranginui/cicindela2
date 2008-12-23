@@ -1,6 +1,6 @@
 package Cicindela::Filters::PicksExtractor::WithRatings;
 
-# $Id: WithRatings.pm 98193 2008-03-13 06:29:08Z i-ihara $
+# $Id$
 #
 # ユーザがそれぞれのアイテムにレートをつけるタイプ。
 

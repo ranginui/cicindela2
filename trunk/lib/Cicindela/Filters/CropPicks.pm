@@ -1,6 +1,6 @@
 package Cicindela::Filters::CropPicks;
 
-# $Id: CropPicks.pm 59237 2007-07-20 10:38:12Z i-ihara $
+# $Id$
 
 use strict;
 use base qw(Cicindela::Filters);

@@ -1,6 +1,6 @@
 package Cicindela::Filters::SlopeOneDiffs;
 
-# $Id: SlopeOneDiffs.pm 61063 2007-08-08 07:02:34Z i-ihara $
+# $Id$
 
 use strict;
 use base qw(Cicindela::Filters);

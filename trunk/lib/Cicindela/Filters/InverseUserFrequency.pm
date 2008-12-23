@@ -1,6 +1,6 @@
 package Cicindela::Filters::InverseUserFrequency;
 
-# $Id: InverseUserFrequency.pm 61037 2007-08-08 02:55:10Z i-ihara $
+# $Id$
 #
 # ratings を上書き変更するんじゃなくて、iuf のテーブルを別に作って item_id - iuf の対応を覚えさせておくタイプ
 

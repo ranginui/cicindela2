@@ -1,6 +1,6 @@
 package Cicindela::Filters::RatingsConverter::Log;
 
-# $Id: Log.pm 150374 2008-12-10 11:11:17Z i-ihara $
+# $Id$
 #
 # log
 

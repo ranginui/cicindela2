@@ -1,6 +1,6 @@
 package Cicindela::Filters::RawSQL;
 
-# $Id: RawSQL.pm 127574 2008-08-11 12:42:18Z i-ihara $
+# $Id$
 
 use strict;
 use base qw(Cicindela::Filters);

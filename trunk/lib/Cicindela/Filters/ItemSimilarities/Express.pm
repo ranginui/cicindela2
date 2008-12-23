@@ -1,6 +1,6 @@
 package Cicindela::Filters::ItemSimilarities::Express;
 
-# $Id: Express.pm 71479 2007-10-22 08:26:35Z i-ihara $
+# $Id$
 
 use strict;
 use base qw(Cicindela::Filters::ItemSimilarities);
