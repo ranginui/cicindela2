@@ -1,6 +1,6 @@
 package Cicindela::Filters::Ranking;
 
-# $Id: Ranking.pm 61037 2007-08-08 02:55:10Z i-ihara $
+# $Id$
 #
 # simple ranking
 

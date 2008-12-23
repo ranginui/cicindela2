@@ -1,6 +1,6 @@
 package Cicindela::Filters::PicksExtractor;
 
-# $Id: PicksExtractor.pm 58864 2007-07-18 12:47:24Z i-ihara $
+# $Id$
 #
 # ItemSimilarties など、重い統計処理用に、picks /ratings の一部データのみメモリテーブルにコピーする系。
 # picks(ratings) から読み出して extracted_picks(extracted_ratings) に出力する。

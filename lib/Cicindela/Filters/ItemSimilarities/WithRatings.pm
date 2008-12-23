@@ -1,6 +1,6 @@
 package Cicindela::Filters::ItemSimilarities::WithRatings;
 
-# $Id: WithRatings.pm 61387 2007-08-09 08:10:37Z i-ihara $
+# $Id$
 #
 # ItemSimilarities のレーティング付き版
 

@@ -1,6 +1,6 @@
 package Cicindela::Filters::CopyPicks::WithRatings;
 
-# $Id: WithRatings.pm 61169 2007-08-08 11:42:44Z i-ihara $
+# $Id$
 
 use strict;
 use base qw(Cicindela::Filters::CopyPicks);

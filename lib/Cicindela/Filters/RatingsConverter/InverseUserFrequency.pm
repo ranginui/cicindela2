@@ -1,6 +1,6 @@
 package Cicindela::Filters::RatingsConverter::InverseUserFrequency;
 
-# $Id: InverseUserFrequency.pm 61037 2007-08-08 02:55:10Z i-ihara $
+# $Id$
 #
 # ratingsを上書きするタイプ
 # だが、ItemSimiarities で特にレーティングが1/0のみの場合、たぶんここでやっても↓の計算

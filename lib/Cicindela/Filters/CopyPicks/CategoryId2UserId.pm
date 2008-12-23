@@ -1,6 +1,6 @@
 package Cicindela::Filters::CopyPicks::CategoryId2UserId;
 
-# $Id: CategoryId2UserId.pm 127522 2008-08-11 10:59:51Z i-ihara $
+# $Id$
 #
 # category_id を user_id にみたてて picks へロードする。
 #

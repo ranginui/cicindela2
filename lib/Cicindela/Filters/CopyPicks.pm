@@ -1,6 +1,6 @@
 package Cicindela::Filters::CopyPicks;
 
-# $Id: ZScore.pm 59237 2007-07-20 10:38:12Z i-ihara $
+# $Id$
 #
 # まず最初にオリジナルの picks を集計用にコピーする系。picks (またはratings) への出力をする。
 #

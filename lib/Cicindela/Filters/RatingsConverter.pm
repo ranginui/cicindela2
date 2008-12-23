@@ -1,6 +1,6 @@
 package Cicindela::Filters::RatingsConverter;
 
-# $Id: RatingsConverter.pm 61052 2007-08-08 06:16:27Z i-ihara $
+# $Id$
 #
 # extracted_ratings テーブルの rating を補正する系の親クラス(abstract class)
 

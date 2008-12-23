@@ -1,6 +1,6 @@
 package Cicindela::Filters::CopyPicks::TagId2UserId;
 
-# $Id: ZScore.pm 59237 2007-07-20 10:38:12Z i-ihara $
+# $Id$
 #
 # tag_id を user_id にみたてて picks へロードする。
 # "users who chose this also chose these" -> "tags associated with this are also associated with these"

@@ -1,6 +1,6 @@
 package Cicindela::Filters::UserSimilarities;
 
-# $Id: UserSimilarities.pm 105775 2008-04-22 02:51:52Z i-ihara $
+# $Id$
 #
 # 見た/見ない, ブックマークした/しない など、1/0 のみで☆レーティングのないデータにおける user間類似度
 

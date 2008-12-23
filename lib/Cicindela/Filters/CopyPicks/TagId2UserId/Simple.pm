@@ -1,6 +1,6 @@
 package Cicindela::Filters::CopyPicks::TagId2UserId::Simple;
 
-# $Id: Simple.pm 96925 2008-03-06 11:30:40Z i-ihara $
+# $Id$
 #
 # TagId2UserIdと同じだが、アイテムの新しい順ではなくて、タグの新しい順にピックアップする
 # (古いアイテムへのタグが更新されると、そのアイテムが浮上してしまう。アイテムの新鮮さを

@@ -1,6 +1,6 @@
 package Cicindela::Filters::CommonTags;
 
-# $Id: CommonTagsConverter.pm 59087 2007-07-19 16:58:16Z i-ihara $
+# $Id$
 
 use strict;
 use base qw(Cicindela::Filters);

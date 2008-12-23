@@ -1,6 +1,6 @@
 package Cicindela::Filters::UserSimilarities::CopyFromOtherDB;
 
-# $Id: CopyFromOtherDB.pm 127630 2008-08-12 01:34:02Z i-ihara $
+# $Id$
 
 use strict;
 use base qw(Cicindela::Filters::UserSimilarities);

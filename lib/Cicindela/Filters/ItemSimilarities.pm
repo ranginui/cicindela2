@@ -1,6 +1,6 @@
 package Cicindela::Filters::ItemSimilarities;
 
-# $Id: ItemSimilarities.pm 106699 2008-04-28 12:39:09Z i-ihara $
+# $Id$
 #
 # 見た/見ない, ブックマークした/しない など、1/0 のみで☆レーティングのないデータにおける item間類似度
 

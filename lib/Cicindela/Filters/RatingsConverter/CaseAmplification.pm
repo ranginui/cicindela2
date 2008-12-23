@@ -1,6 +1,6 @@
 package Cicindela::Filters::RatingsConverter::CaseAmplification;
 
-# $Id: CaseAmplification.pm 92746 2008-02-22 03:04:55Z i-ihara $
+# $Id$
 
 use strict;
 use base qw(Cicindela::Filters::RatingsConverter);

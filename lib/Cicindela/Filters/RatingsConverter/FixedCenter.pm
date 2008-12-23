@@ -1,6 +1,6 @@
 package Cicindela::Filters::RatingsConverter::FixedCenter;
 
-# $Id: FixedCenter.pm 61037 2007-08-08 02:55:10Z i-ihara $
+# $Id$
 #
 # レーティング3が中心とか決まっている場合など用
 
