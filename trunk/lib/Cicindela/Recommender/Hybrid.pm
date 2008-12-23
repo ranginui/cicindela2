@@ -1,6 +1,6 @@
 package Cicindela::Recommender::Hybrid;
 
-# $Id: Hybrid.pm 105638 2008-04-21 09:36:06Z i-ihara $
+# $Id$
 
 use strict;
 use base qw(Cicindela::Recommender);

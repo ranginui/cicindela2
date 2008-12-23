@@ -1,6 +1,6 @@
 package Cicindela::Recommender::ItemSimilarities::WithRatings::SameCategoryOnly;
 
-# $Id: SameCategoryOnly.pm 94531 2008-02-27 10:03:55Z i-ihara $
+# $Id$
 
 use strict;
 use base qw(Cicindela::Recommender::ItemSimilarities::SameCategoryOnly Cicindela::Recommender::ItemSimilarities::WithRatings);

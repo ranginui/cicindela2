@@ -1,6 +1,6 @@
 package Cicindela::Recommender::Cascaded;
 
-# $Id: Cascaded.pm 137920 2008-10-01 12:35:40Z i-ihara $
+# $Id$
 
 # いくつかの set & op を組み合わせて多重引きする用
 #

@@ -1,6 +1,6 @@
 package Cicindela::Recommender::SlopeOneDiffs::LimitCategory;
 
-# $Id: LimitCategory.pm 123593 2008-07-29 12:19:57Z i-ihara $
+# $Id$
 
 use strict;
 use base qw(Cicindela::Recommender::SlopeOneDiffs);
