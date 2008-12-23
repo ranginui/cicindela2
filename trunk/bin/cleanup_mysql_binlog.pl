@@ -7,7 +7,7 @@
 # based on:
 #   http://dev.mysql.com/doc/refman/5.0/en/log-file-maintenance.html
 #
-# $Id: cleanup_mysql_binlog.pl 152356 2008-12-23 08:57:48Z i-ihara $
+# $Id$
 
 use strict;
 use lib "/home/cicindela/lib";
