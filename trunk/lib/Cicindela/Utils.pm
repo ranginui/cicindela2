@@ -1,7 +1,7 @@
 package Cicindela::Utils;
 
 #
-# $Id: Utils.pm 59337 2007-07-23 03:09:06Z i-ihara $
+# $Id$
 #
 # クラスを分けるまでもない雑多なファンクション集
 # Config::MixIn には依存しない
