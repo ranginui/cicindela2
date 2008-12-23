@@ -1,6 +1,6 @@
 package Cicindela::Recommender::ItemSimilarities::WithRatings;
 
-# $Id: ItemSimilarities.pm 59244 2007-07-20 12:30:24Z i-ihara $
+# $Id$
 
 use strict;
 use base qw(Cicindela::Recommender::ItemSimilarities);

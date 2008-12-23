@@ -1,6 +1,6 @@
 package Cicindela::Recommender::UserSimilarities;
 
-# $Id: UserSimilarities.pm 127679 2008-08-12 03:36:19Z i-ihara $
+# $Id$
 
 use strict;
 use base qw(Cicindela::Recommender);
