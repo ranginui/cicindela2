@@ -12,7 +12,7 @@
 
 諸般の事情により，cicindela のチェックアウトディレクトリ = /home/cicindela , perl = /usr/bin/perl がハードコードされている部分があります。
 
-別のディレクトリにチェックアウトした場合や，perl のパスが違う場合は，以下のスクリプトでソースファイルを上書き置換することができます。(...イマイチなのは分かってます)
+別のディレクトリにチェックアウトした場合や，perl のパスが違う場合は，以下のスクリプトでソースファイル内のハードコード部分を上書き置換することができます。(...もっとマシな方法をそのうち考えたいです。)
 {{{
  cd misc
  perl substitute_project_paths.pl --perl-path=/usr/local/bin/perl --cicindela_home=/where/you/have/checkedout/cicindela
@@ -50,8 +50,58 @@ perl はたいていインストール済だと思いますが，バージョン
     intall Module::Pluggable; install Class::Singleton;" 
 }}}
 
+== apache + modperl のインストール ==
 
+以下のサイトに従って apache とmodperl をインストールします。
 
+ * http://httpd.apache.org/download.cgi
+ * http://perl.apache.org/download/index.html
+
+=== modperl の設定 ===
+
+以下の行を apache の設定ファイル httpd.conf の最後に追加します。
+{{{
+ Include /home/cicindela/etc/httpd/modperl.conf
+}}}
+※ディレクトリは環境によって変わる場合があります。
+
+== daemontoolsのインストール ==
+
+以下のサイトからdaemontoolsを取得し，インストールします。
+ * http://cr.yp.to/daemontools/install.html
+
+=== daemontoolsの設定 ===
+
+分析用のメインバッチ 
+{{{
+ sudo ln -s /home/cicindela/etc/service/cicindela_batch /service/cicindela_batch
+}}}
+
+データの挿入用バッファをフラッシュするバッチ
+{{{
+ sudo ln -s /home/cicindela/etc/service/cicindela_flush_buffers /service/cicindela_flush_buffers
+}}}
+
+== setup log ==
+
+全てのログは (apache handler のものも，batch のものも) /home/cicindela/var/logs/log.txt に書き出されます。
+
+ログの内容は /home/cicindela/etc/log.conf を編集することでカスタマイズできます。詳しくは Log::Log4perl のドキュメントを参照して下さい。
+
+ログファイルは apache と batch の両方から読み書き可能である必要があります。以下をやっておいた方が安全かもしれません。
+{{{
+ touch /home/cicindela/var/logs/log.txt
+ chmod a+rw /home/cicindela/var/logs/log.txt
+}}}
+
+ログをローテートしたい場合は，以下を /etc/logrotate.conf に追加するなどして下さい。
+{{{
+ /home/cicindela/var/logs/log.txt {
+   daily
+   create 0666 (user) (group)
+   rotate 2
+ }
+}}}
 
 
 = EN =
