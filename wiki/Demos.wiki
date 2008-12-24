@@ -16,7 +16,7 @@ misc/clip_data 以下には livedoor clip の公開データ (の一部) を書�
 
 misc/movielens_data 以下には，project grouplens が公開しているデータセットを利用するためのローダースクリプトがあります。(movielens のデータセット自体は別途ダウンロードする必要があります。)
 
-また，lib/Cicindela/Config/_common.pm に，上の二つを利用するためのサンプル設定がコメントとして挿入してありますので，これらを必要に応じてコメントアウトして使います。
+また，lib/Cicindela/Config/`_`common.pm に，上の二つを利用するためのサンプル設定がコメントとして挿入してありますので，これらを必要に応じてコメントアウトして使います。
 
 == livedoor clip dataset を使ったサンプルセットアップ ==
 
@@ -60,7 +60,7 @@ cicindela は，集計セット毎に別々のデータベースを利用しま�
 
 === 設定 ===
 
-lib/Cicindela/Config/_common.pm の中に，clip のデータを利用するためのサンプル設定がコメントとして挿入されています。
+lib/Cicindela/Config/`_`common.pm の中に，clip のデータを利用するためのサンプル設定がコメントとして挿入されています。
 
 該当部分 ("## sample settings for ldclip_dataset " というコメントの直後から，"## sample
 settings for movielens dataset " というコメントの直前まで) のコメントアウトを外して下さい。
