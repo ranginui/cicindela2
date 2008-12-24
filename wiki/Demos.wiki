@@ -20,7 +20,7 @@
 === データベース & テーブル作成 ===
 
 cicindela は，集計セット毎に別々のデータベースを利用します。
-作成するデータベース名を cicindela_clip_db ，mysql のパスを /usr/local/mysql/bin/mysql の場合，以下のようにして新規データベースのセットアップができます。
+例えば作成するデータベース名が cicindela_clip_db ，mysql のパスが /usr/local/mysql/bin/mysql である場合，以下のようにして新規データベースのセットアップができます。
 {{{
  cd misc
  perl create_init_sql.pl --db_name=cicindela_clip_db | /usr/local/mysql/bin/mysql -uroot
@@ -55,7 +55,7 @@ cicindela は，集計セット毎に別々のデータベースを利用しま�
 
 ※ローダースクリプトを利用するには perl モジュール Text:CSV_XS が必要です。
 
-※このスクリプトは中間データを work_dir に書き出したあと「load data infile ... 」を mysql に渡します。従って，work_dir は mysql ユーザから参照可能である必要があります。
+※このスクリプトは中間データを work_dir に書き出したあと「load data infile ... 」ステートメントを mysql に渡します。従って，work_dir は mysql ユーザから参照可能である必要があります。
 
 === 設定 ===
 
