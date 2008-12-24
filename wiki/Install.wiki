@@ -12,7 +12,46 @@
 
 諸般の事情により，cicindela のチェックアウトディレクトリ = /home/cicindela , perl = /usr/bin/perl がハードコードされている部分があります。
 
-もし，別のディレクトリや
+別のディレクトリにチェックアウトした場合や，perl のパスが違う場合は，以下のスクリプトでソースファイルを上書き置換することができます。(...イマイチなのは分かってます)
+{{{
+ cd misc
+ perl substitute_project_paths.pl --perl-path=/usr/local/bin/perl --cicindela_home=/where/you/have/checkedout/cicindela
+}}}
+
+==  mysql (>=5.0)  のインストール==
+ 
+以下のサイトからmysqlを取得し，インストールします。
+ * http://dev.mysql.com/downloads/mysql/5.1.html
+
+=== mysqlの設定  ===
+
+{{{
+ ln -s /home/cicindela/etc/mysql/my.cnf /usr/local/mysql/my.cnf
+}}}
+※ディレクトリは環境によって変わる場合があります。
+
+== perl モジュールのインストール ==
+
+perl はたいていインストール済だと思いますが，バージョンが5.8以上であることを確認して下さい。
+他に以下のモジュールを手動でインストールする必要があります。
+
+ * DBI
+ * DBD::mysql
+ * Ima::DBI
+ * Time::Piece
+ * Log::Log4perl
+ * Module::Pluggable
+ * Class::Singleton
+
+(またはこんな感じで..)
+{{{
+ sudo perl -MCPAN install -e "install DBI; install DBD::mysql; intsall Ima::DBI;
+    install Time::Piece; install Log::Log4perl;
+    intall Module::Pluggable; install Class::Singleton;" 
+}}}
+
+
+
 
 
 = EN =
