@@ -1,0 +1,83 @@
+#summary 基本のしくみ / architecture overview
+
+<wiki:toc max_depth="2" />
+
+= JP =
+
+== 基本 ==
+
+Cicindelaが受け取るデータのうち，もっとも基本になるのは以下の二つのうちの *いずれか一方* 。
+  * picks (あるユーザがあるアイテムを選択した、という情報。ユーザが選択するかしないかの二択で、点数をつけない場合はこちらのみを使う)
+  * ratings (あるユーザがあるアイテムを選択し、ある点数をつけた、という情報。ユーザが点数を入力することができる場合はこちらのみを使う) 
+
+Id はすべて整数値。従って，cicindela とそれを利用するアプリケーションの間では基本的にidだけがやりとりされるため，シンプルでかつ汎用性が高い。
+(オプションとして，整数以外のユーザid/アイテムidも扱うことはできるが，内部的にはすべて整数idに変換される)
+
+これに加えて，以下の情報も扱うことができる。
+  * tagged_relations (あるユーザがあるアイテムに、あるidのタグをつけた、という情報)
+  * catgegories (あるアイテムが、あるカテゴリidに所属する、という情報)
+  * uninterested (あるユーザのレコメンド結果から，あるアイテムを除外してほしい，という情報)
+
+
+それらのデータを各種フィルタに通して順次変換していき、最終的にアイテム間の類似度データを作るのが解析の心臓部にあたる「FilterChain」
+
+
+== 解析のながれ ==
+
+ 嗜好データ入力
+  
+ ↓ (Handlers/Record.pm -> IncomingData.pm)
+ 
+ 入力バッファ
+ picks_buffer, ratings_buffer, tagged_relations_buffer
+  
+ ↓ (bin/flush_buffer.pl )
+ 
+ 一次(生)嗜好データ
+ picks, ratings, tagged_relations
+ 
+ ↓ (Filters/ 以下の各種プラグインフィルタ)
+ 
+ 二次(中間)データ
+ converted_ratings, extracted_ratings, iuf, ...
+ 集計結果テーブル
+ item_similarities, slope_one_diffs, ...
+ 
+ ↓ (集計がすべて終わったら、rename table により一挙に古いテーブルと入れ替わる)
+ 
+ オンラインテーブル
+ converted_ratings_online, item_similarities_online, slope_one_diffs_online, ...
+ 
+ ↓ (Recommender/ 以下の各種レコメンダ → Handlers/Recommend.pm)
+ 
+ レコメンデーション出力
+
+
+APIで受信した嗜好データは、それぞれ以下のテーブルに格納される。
+  * 「このuser_idがこのitem_idを選択した」→ picks
+  * 「このuser_idがこのitem_idにこの評価をつけた」→ratings
+  *  「このuser_idがこのitem_idにこのtag_idをつけた」→tagged_relations
+  *  「このitem_idはこの category_id に所属する」→categories
+  *  「このuser_idはこのitem_idに興味がない」→uninterested
+
+  * ※実際には、競合防止のため、いったん picks_buffer などのバッファに格納され、bin/flush_buffers.pl が定期的にバッファの内容を本テーブルに移動している。
+  * ※また、数値ではないuser_id /item_id を内部用の数値idにマッピングする処理もこのバッファ内で行われる。[詳細はあとで書く]
+
+定期的に、config の定義に従って、複数のフィルタが順に起動される。フィルタは Cicindela::Filters の子クラスで、それぞれ「あるテーブルからデータを読み出し、あるテーブルに書き出す」という動作をする。
+  * 例えば...
+  * PicksExtractor フィルタは、picks テーブルから重要度順 (最新順とか、ユーザ数の多いアイテム順とか) に○件のデータを選択し、extracted_picks テーブルに格納する。
+  * InverseUserFrequency フィルタは、extracted_picks テーブルからアイテム毎のユーザ数を集計し、iuf テーブルに inverse user frequency 値 (スコアリング時に、ユーザの多いデータにスコアが偏るのを補正するために使う) を書き出す。 
+  * ItemSimilarities フィルタは、extracted_picks テーブルと iuf テーブルのデータから、アイテム間の類似度を item_similarities テーブルに書き出す。
+
+全てのフィルタリングが終了すると、Recommender が利用するテーブル(ここでは、最終段のフィルタが書き出した item_similarities テーブル) は item_similarities_online という名前に変更される。それ以外の中間テーブル、および、それまであった item_similarities_online テーブルの内容は破棄される。
+
+レコメンド出力APIは、Cicindela::Recommender の子クラスのどれかを使って出力される。例えば Recommender::ItemSimilarities クラスは Filters::ItemSimilarities と対になっており、Filters::ItemSimilarities が書き出した類似度データ (item_similarities_online テーブル) を元に item別のレコメンドを計算する。
+  * user 別のレコメンドは、上記のテーブルの他に picks / ratings テーブルに保存された嗜好データ (もしくは、converted_picks /converted_ratings に保存された正規化ずみ嗜好データ) をくみあわせて計算される。
+
+== 現在実装されているフィルタ == 
+
+[あとで書く]
+
+== config の書き方の例 ==
+
+[あとで書く]
