@@ -8,7 +8,7 @@
 
 ([Install] を先に済ませてあることが前提です。)
 
-以下のデモセットアップを試す場合は，この操作で misc/ 以下を demo_data ブランチに切り替えて下さい。
+*以下のデモセットアップを試す場合は，この操作で misc/ 以下を demo_data ブランチに切り替えて下さい。*
 {{{
  cd /home/cicindela
  svn switch http://cicindela2.googlecode.com/svn/branches/demo_data/misc misc
