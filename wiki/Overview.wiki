@@ -1,5 +1,5 @@
 #summary 概要 / overview
-#labels Phase-Design,Featured
+#labels Phase-Start,Featured
 
 <wiki:toc max_depth="2" />
 
