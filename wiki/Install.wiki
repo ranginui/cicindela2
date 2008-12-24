@@ -46,9 +46,9 @@ perl はたいていインストール済だと思いますが，バージョン
 
 (またはこんな感じで..)
 {{{
- sudo perl -MCPAN -e "install DBI; install DBD::mysql; intsall Ima::DBI;
+ sudo perl -MCPAN -e "install DBI; install DBD::mysql; install Ima::DBI;
     install Time::Piece; install Log::Log4perl;
-    intall Module::Pluggable; install Class::Singleton;" 
+    install Module::Pluggable; install Class::Singleton;" 
 }}}
 
 == apache + modperl のインストール ==
@@ -157,9 +157,9 @@ install the following modules by hand
 
 (or do something like..)
 {{{
- sudo perl -MCPAN -e "install DBI; install DBD::mysql; intsall Ima::DBI;
+ sudo perl -MCPAN -e "install DBI; install DBD::mysql; install Ima::DBI;
     install Time::Piece; install Log::Log4perl;
-    intall Module::Pluggable; install Class::Singleton;" 
+    install Module::Pluggable; install Class::Singleton;" 
 }}}
 
 == install apache + modperl ==
