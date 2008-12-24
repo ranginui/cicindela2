@@ -1,5 +1,5 @@
 #summary 動作に必要なプログラムやモジュール一覧 / programs and modules required before installation
-#labels Phase-Deploy,Featured
+#labels Phase-Deploy
 
 <wiki:toc max_depth="2" />
 
