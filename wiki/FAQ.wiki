@@ -1,0 +1,15 @@
+#summary FAQ
+
+<wiki:toc max_depth="2" />
+
+= JP =
+
+= EN =
+
+== what happend to cicindela "1" ? ==
+
+We messed up the repository and do not even want you to look at the revision history.
+
+== why is it so poorly domentated ? ==
+
+We are working on it.
