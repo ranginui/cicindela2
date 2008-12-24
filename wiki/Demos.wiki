@@ -77,7 +77,7 @@ settings for movielens dataset " というコメントの直前まで) のコメ
 
 log に "clip_simple done." と表示されるまで待ちます。(ある程度時間がかります。)
 
-== clip_simple 集計セットの結果確認 ==
+=== clip_simple 集計セットの結果確認 ===
 
 {{{
  /usr/local/apache2/bin/apachectl start
