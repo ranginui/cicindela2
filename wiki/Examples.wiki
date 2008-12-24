@@ -76,7 +76,7 @@
  
     'clip_express' => {
         datasource =>  [ 'dbi:mysql:clip;host=master-host', 'cicindela', 'japana' ],
-        slave_datasource => [ 'dbi:mysql:clip;host=slave-host, 'cicindela', 'inspeanlare' ],
+        slave_datasource => [ 'dbi:mysql:clip;host=slave-host', 'cicindela', 'inspeanlare' ],
         filters => [
             [ 'PicksExtractor', {
                 interval => '3 month',
