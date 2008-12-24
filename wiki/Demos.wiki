@@ -1,5 +1,7 @@
 #summary Setting up cicindela with demo datasets for a quick start
 
+<wiki:toc max_depth="2" />
+
 = JP =
 
 ライブドア，あるいは他者が提供するデモ用のデータセットを利用するための各種ファイルが用意してあります。
@@ -102,13 +104,14 @@ cicindela はユーザやアイテムなどをすべて id値のみで扱って�
 「データのインポート」の手順の際に，misc/clip_data 以下に pages.txt という中間ファイルが書き出されていますので，これを元にそれぞれのアイテムid が実際にはどの url を表しているのかを確認して下さい。
 
 ちなみにアイテムid 39102 は
+
 「livedoor reader パーフェクトガイド - livedoor ディレクター Blog」http://blog.livedoor.jp/ld_directors/archives/50735409
+
 です。
-レコメンドのトップ2つのid 49425 と 44936 は、いずれも livedoor reader のメインの開発者のブログである http://mala.nowa.jp 内のエントリでした。
+レコメンドのトップ2つのid 49425 と 44936 は、いずれも livedoor reader のメインの開発者のブログである http://mala.nowa.jp/ 内のエントリでした。
 
 
 
 == movielens dataset を使ったサンプルセットアップ ==
 
 = EN =
-
