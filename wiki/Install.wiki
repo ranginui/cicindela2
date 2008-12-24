@@ -40,7 +40,7 @@ The script 'misc/substitute_project_paths.pl' can search and replace all occuren
 Follow the instructions on
  * http://dev.mysql.com/downloads/mysql/5.1.html
 
-== configure mysql  ==
+=== configure mysql  ===
 {{{
  ln -s /home/cicindela/etc/mysql/my.cnf /usr/local/mysql/my.cnf
 }}}
@@ -74,7 +74,7 @@ Follow the instructions in the following pages:
  * http://httpd.apache.org/download.cgi
  * http://perl.apache.org/download/index.html
 
-== setup modperl conf ==
+=== setup modperl conf ===
 
 Add the following line at the end of httpd.conf
 {{{
@@ -88,7 +88,7 @@ cicindela's path may be different depending on your installation.
 Follow the instructions on:
  * http://cr.yp.to/daemontools/install.html
 
-== setup daemontools ==
+=== setup daemontools ===
 
 main calculation batch
 {{{
@@ -123,4 +123,3 @@ To rotate the logs daily, you can add
  }
 }}}
 in /etc/logrotate.conf.
-
