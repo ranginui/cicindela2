@@ -10,11 +10,10 @@
 
 We messed up the repository and do not even want you to look at the revision history.
 
-== why is it so poorly documentated ? ==
+== why is it so poorly documented ? ==
 
 We are working on it...
 
 == how do you pronounce "cicindela" ? ==
 
 That's what we wish to know. We bet it is "cis-sin-del-la" in English. Is it "chi-chin-del-la" in latin ?
-
