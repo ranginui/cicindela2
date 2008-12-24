@@ -12,11 +12,15 @@ Cicindela は、web API での入出力を基本とした汎用レコメンデ�
 という形に一般化できます。
 
 Cicindela に「ユーザ1がアイテム2を選択した」という情報を登録するには
-  http://(ベースURL)/cicindela/ *record* ?set=(セット名)& *op=insert_pick* & *user_id=1* & *item_id=2*
+{{{
+  http://(ベースURL)/cicindela/record?set=(セット名)&op=insert_pick&user_id=1&item_id=2
+}}}
 というURLにリクエストを送るだけです。
 
 また、Cicindela に「ユーザ1にオススメするアイテムは ?」という質問をするには
-  http://(ベースURL)/cicindela/*recommend* ?set=(セット名)& *op=for_user* & *user_id=1*
+{{{
+  http://(ベースURL)/cicindela/recommend?set=(セット名)&op=for_user&user_id=1
+}}}
 というURLにリクエストを送るだけです。結果は
 {{{
   10
