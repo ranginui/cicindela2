@@ -1,4 +1,4 @@
-#summary How to setup
+#summary セットアップ方法  / How to setup
 
 <wiki:toc max_depth="2" />
 = JP =
@@ -103,6 +103,9 @@ perl はたいていインストール済だと思いますが，バージョン
  }
 }}}
 
+== 次に ==
+
+[Demo] でだいたいの仕組みを把握することをお薦めします。
 
 = EN =
 
