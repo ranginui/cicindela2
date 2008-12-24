@@ -53,7 +53,7 @@ cicindela は，集計セット毎に別々のデータベースを利用しま�
  perl importer.pl  --work_dir=`pwd` | /usr/local/mysql/bin/mysql -uroot
 }}}
 
-※ローダースクリプトを利用するには perl モジュール Text:CSV_XS が必要です。
+※ローダースクリプトを利用するには perl モジュール Text::CSV_XS が必要です。
 
 ※このスクリプトは中間データを work_dir に書き出したあと「load data infile ... 」ステートメントを mysql に渡します。従って，work_dir は mysql ユーザから参照可能である必要があります。
 
@@ -209,5 +209,82 @@ clip のところでも述べたように，cicindela は基本的には id の�
 
 
 
-
 = EN =
+
+A sample dataset is included in the distribution. There also is a loader script and sample configurations to be used with grouplens dataset.
+
+(Installation of prerequisites and cicindela basic setup should already be finshed. Please read [Install] first.)
+
+*switch the 'misc' directory to demo_data branch by this comand to retrieve the attached datasets or dataset loader scripts.*
+{{{
+ cd /home/cicindela
+ svn switch http://cicindela2.googlecode.com/svn/branches/demo_data/misc misc
+}}}
+
+== sample setup with movielens datasets ==
+
+=== setup database and tables ===
+
+Cicindela uses a separate database for each calculation set.
+A new datbase named "cindela_movielens_db" can easily be created and set up by the following command:
+{{{
+ cd misc
+ perl create_init_sql.pl --db_name=cicindela_movielens_db
+     --grant_user=cicindela --grant_host=% --grant_pass=japana | /usr/local/mysql/bin/mysql -uroot
+}}}
+
+=== load dataset ===
+
+Obtain the movielens dataset (1,000,000 Data Set) from the following site:
+
+http://www.grouplens.org/node/73
+
+place the unzipped files into 'misc/movieles_data/' and then do:
+{{{
+ cd misc/movielens_data
+ perl importer.pl --work_dir=`pwd` | /usr/local/mysql/bin/mysql -uroot cicindela_movielens_db
+}}}
+(actually you only need 'ratings.dat' file).
+
+
+=== configuration ===
+
+lib/Cicindela/Config/`_`common.pm contains two sample setups to be used with this movielens data. ('movielens' => ...part which appears directly after the line "## sample settings for movielens dataset")
+
+Both setups are commented out by default. Former set uses a normal item-to-item similarity matrix, where the latter set uses slope one. Activate either of the two.
+
+You may also have to edit the "datasource => ..." part to connect to the database.
+
+=== manually activate 'movielens' analysis ===
+
+The following command will activate the analysis sequence.
+{{{
+ bin/batch.pl --track=3
+}}}
+You willl have to call this command twice, since the batch does nothing when it is run the first time (= when 'last_processed' timestamp is null ).
+
+'--track=3' option will tell the batch.pl script to process only the calculation sets which have "calculation_track" vaiable set to "3". 
+
+As 'movielens' set has a line specifying 'calculaton_track=>3'  the basic calculation batch (which should have been installed  in [Install] ) will skip this set.
+
+All logs are written in var/logs/log.txt.
+Wait until the line "movielens done." appears in the the log. It may take a while.
+
+=== retrieving results from 'movielens' set ===
+You can retrieve item to item recommendation for item 741 by calling:
+{{{
+  http://127.0.0.1/cicindela/recommend?op=for_item&set=movielens&item_id=741
+}}}
+The result should look something like this:
+{{{
+3000
+1274
+29
+...
+}}}
+The response is a simple ,newline-separated list of ids.
+
+Basicly, cicindela only deals with integer user_ids and item_ids. You should refer to the original data file 'movies.dat' to find out the corresponding movies titles.
+
+In the above example, item id 741 was  "Ghost in the shell"，id 3000 ="Princess Mononoke" , id 1274= "Akira " and  id 29 = "City of Lost Children". Result may differ depending on which of the two settings you have selected, but this one seems pretty OK.
+
