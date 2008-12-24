@@ -1,4 +1,5 @@
 #summary 概要 / overview
+#labels Phase-Design,Featured
 
 <wiki:toc max_depth="2" />
 
