@@ -1,5 +1,7 @@
 #summary configの書き方例 / config examples
 
+<wiki:toc max_depth="2" />
+
 = JP =
 
 == シンプルな設定例1 ==
@@ -139,3 +141,7 @@
 
 
 [あとでもっと書く]
+
+= EN =
+
+wow  I have to translate all these...
