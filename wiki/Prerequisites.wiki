@@ -4,13 +4,13 @@
 
 In addition, the following modules must be installed manually.
 
- DBI
- DBD::mysql
- Ima::DBI
- Time::Piece
- Log::Log4perl
- Module::Pluggable
- Class::Singleton
+ * DBI
+ * DBD::mysql
+ * Ima::DBI
+ * Time::Piece
+ * Log::Log4perl
+ * Module::Pluggable
+ * Class::Singleton
 
 = MySQL (>=5.0) =
 
