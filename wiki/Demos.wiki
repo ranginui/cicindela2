@@ -65,7 +65,7 @@ lib/Cicindela/Config/`_`common.pm の中に，clip のデータを利用する�
 該当部分 ("## sample settings for ldclip_dataset " というコメントの直後から，"## sample
 settings for movielens dataset " というコメントの直前まで) のコメントアウトを外して下さい。
 
-== clip_simple 集計セットの手動起動 ==
+=== clip_simple 集計セットの手動起動 ===
 
 {{{
  bin/batch.pl --track=1
