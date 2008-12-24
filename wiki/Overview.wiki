@@ -42,6 +42,7 @@ Id はすべて整数値。従って，cicindela とそれを利用するアプ�
  
  二次(中間)データ
  converted_ratings, extracted_ratings, iuf, ...
+
  集計結果テーブル
  item_similarities, slope_one_diffs, ...
  
