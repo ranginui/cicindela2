@@ -1,8 +1,10 @@
-#summary Setting up cicindela with demo datasets for a quick start
+#summary デモ用データセットを用いたクイックスタート / quick start with demo datasets
 
 <wiki:toc max_depth="2" />
 
 = JP =
+
+([Install] を先に済ませてあることが前提です。)
 
 ライブドア，あるいは他者が提供するデモ用のデータセットを利用するための各種ファイルが用意してあります。
 
