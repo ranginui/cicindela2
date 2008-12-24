@@ -1,4 +1,5 @@
 #summary 意味のないFAQ / FAQs, mostly useless
+#labels Phase-Support
 
 <wiki:toc max_depth="2" />
 
