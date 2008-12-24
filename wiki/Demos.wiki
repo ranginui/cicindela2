@@ -243,7 +243,7 @@ In the example above, the following sql is emitted in addition to the database i
   flush privileges;
 }}}  
 
-You might need to delete some of the default wildcard name users, as their priorites are often very much confusing...
+You might better  delete some of the default wildcard name users, as their priorities often become very much confusing...
 {{{
  SQL> drop user ""@"localhost";
  SQL> flush privileges;
@@ -302,6 +302,6 @@ The result should look something like this:
 }}}
 The response is a simple ,newline-separated list of ids.
 
-Basicly, cicindela only deals with integer user_ids and item_ids. You should refer to the original data file 'movies.dat' to find out the corresponding movies titles.
+Basically, cicindela only deals with integer user ids and item ids. You should refer to the original data file 'movies.dat' to find out the corresponding movies titles.
 
 In the above example, item id 741 was  "Ghost in the shell"，id 3000 ="Princess Mononoke" , id 1274= "Akira " and  id 29 = "City of Lost Children". Result may differ depending on which of the two settings you have selected, but this one seems pretty OK, doesn't it ?
