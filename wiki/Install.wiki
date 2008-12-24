@@ -1,4 +1,4 @@
-#summary NOW WRITING...
+#summary How to setup
 
 == checkout cicindela ==
 
@@ -82,4 +82,3 @@ insert buffer flusher
 {{{
  sudo ln -s /home/cicindela/etc/service/cicindela_flush_buffers /service/cicindela_flush_buffers
 }}}
-
