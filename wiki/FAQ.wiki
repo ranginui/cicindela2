@@ -6,7 +6,7 @@
 
 = EN =
 
-== what happend to cicindela "1" ? ==
+== what happened to cicindela "1" ? ==
 
 We messed up the repository and do not even want you to look at the revision history.
 
