@@ -1,0 +1,8 @@
+#summary Setting up cicindela with demo datasets for quick start
+
+= JP =
+== livedoor clip dataset を使ったサンプルセットアップ ==
+
+== movielens dataset を使ったサンプルセットアップ ==
+
+= EN =
