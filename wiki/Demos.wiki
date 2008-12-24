@@ -104,12 +104,13 @@ cicindela はユーザやアイテムなどをすべて id値のみで扱って�
 
 「データのインポート」の手順の際に，misc/clip_data 以下に pages.txt という中間ファイルが書き出されていますので，これを元にそれぞれのアイテムid が実際にはどの url を表しているのかを確認して下さい。
 
-ちなみにアイテムid 39102 は
-
- 「livedoor reader パーフェクトガイド - livedoor ディレクター Blog」http://blog.livedoor.jp/ld_directors/archives/50735409
-
+※ちなみにアイテムid 39102 は
+ 
+ 「livedoor reader パーフェクトガイド - livedoor ディレクター Blog」http://blog.livedoor.jp/ld_directors/archives/50735409.html
+  
 です。
-レコメンドのトップ2つのid 49425 と 44936 は、いずれも livedoor reader のメインの開発者のブログである http://mala.nowa.jp/ 内のエントリでした。
+レコメンドのトップ2つのid 49425 と 44936 は、いずれも livedoor reader のメインの開発者のブログである  http://mala.nowa.jp/ 内のエントリでした。
+
 
 === clip_hybrid 集計セットの手動起動と確認 ===
 
