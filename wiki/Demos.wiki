@@ -49,8 +49,7 @@ cicindela は，集計セット毎に別々のデータベースを利用しま�
 === データのインポート ===
 {{{
  cd misc/clip_data
- gunzip ldclip_dataset_s.csv.gz
- perl importer.pl  --work_dir=`pwd` | /usr/local/mysql/bin/mysql -uroot
+ gunzip ldclip_dataset_s.csv.gz | perl importer.pl  --work_dir=`pwd` | /usr/local/mysql/bin/mysql -uroot
 }}}
 
 ※ローダースクリプトを利用するには perl モジュール Text::CSV_XS が必要です。
