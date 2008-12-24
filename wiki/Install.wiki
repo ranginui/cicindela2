@@ -105,7 +105,7 @@ perl はたいていインストール済だと思いますが，バージョン
 
 == 次に ==
 
-「このページを読んだ人は次に [Demo] ページも読んでいます」
+「このページを読んだ人は次に [Demos] も読んでいます」
 
 = EN =
 
@@ -218,4 +218,4 @@ in /etc/logrotate.conf.
 
 == next ==
 
-We recommend proceeding to [Demo], for a quick start using demo datasets.
+We recommend proceeding to [Demos], for a quick start using demo datasets.
