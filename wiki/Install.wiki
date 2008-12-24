@@ -82,7 +82,7 @@ perl はたいていインストール済だと思いますが，バージョン
  sudo ln -s /home/cicindela/etc/service/cicindela_flush_buffers /service/cicindela_flush_buffers
 }}}
 
-== setup log ==
+== ログの設定 ==
 
 全てのログは (apache handler のものも，batch のものも) /home/cicindela/var/logs/log.txt に書き出されます。
 
@@ -105,7 +105,7 @@ perl はたいていインストール済だと思いますが，バージョン
 
 == 次に ==
 
-[Demo] でだいたいの仕組みを把握することをお薦めします。
+「このページを読んだ人は次に [Demo] ページも読んでいます」
 
 = EN =
 
@@ -215,3 +215,7 @@ To rotate the logs daily, you can add
  }
 }}}
 in /etc/logrotate.conf.
+
+== next ==
+
+We recommend proceeding to [Demo], for a quick start using demo datasets.
