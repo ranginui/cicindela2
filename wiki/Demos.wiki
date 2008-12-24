@@ -12,18 +12,13 @@
  svn switch http://cicindela2.googlecode.com/svn/branches/demo_data/misc misc
 }}}
 
-misc/clip_data 以下には livedoor clip の公開データ (の一部) を書き出したcsvデータと，そのロード用のスクリプトがあります。
-
-misc/movielens_data 以下には，project grouplens が公開しているデータセットを利用するためのローダースクリプトがあります。(movielens のデータセット自体は別途ダウンロードする必要があります。)
-
-また，lib/Cicindela/Config/`_`common.pm に，上の二つを利用するためのサンプル設定がコメントとして挿入してありますので，これらを必要に応じてコメントアウトして使います。
 
 == livedoor clip dataset を使ったサンプルセットアップ ==
 
 === データベース & テーブル作成 ===
 
 cicindela は，集計セット毎に別々のデータベースを利用します。
-作成するデータベース名を cicindela_clip_db ，mysql のパスを /usr/local/mysql/bin/mysql の場合，新規データベースのセットアップは以下のようになります。
+作成するデータベース名を cicindela_clip_db ，mysql のパスを /usr/local/mysql/bin/mysql の場合，以下のようにして新規データベースのセットアップができます。
 {{{
  cd misc
  perl create_init_sql.pl --db_name=cicindela_clip_db | /usr/local/mysql/bin/mysql -uroot
@@ -44,7 +39,7 @@ cicindela は，集計セット毎に別々のデータベースを利用しま�
 
 デフォルトのワイルドカードのユーザが権限設定をややこしくする場合があるので，必要に応じて
 {{{
- SQL> drop user ""'@"localhost";
+ SQL> drop user ""@"localhost";
  SQL> flush privileges;
 }}}
 などをしといた方がいいかもしれません。
@@ -105,13 +100,49 @@ cicindela はユーザやアイテムなどをすべて id値のみで扱って�
 
 ちなみにアイテムid 39102 は
 
-「livedoor reader パーフェクトガイド - livedoor ディレクター Blog」http://blog.livedoor.jp/ld_directors/archives/50735409
+ 「livedoor reader パーフェクトガイド - livedoor ディレクター Blog」http://blog.livedoor.jp/ld_directors/archives/50735409
 
 です。
 レコメンドのトップ2つのid 49425 と 44936 は、いずれも livedoor reader のメインの開発者のブログである http://mala.nowa.jp/ 内のエントリでした。
 
+=== clip_hybrid 集計セットの手動起動と確認 ===
+
+上でコメントアウトした設定ファイルには，clip_simple の他に clip_tags, clip_hybrid という二つの集計セットが定義されています。
+
+clip_tags は，tag_id を user_id にみたてて読み込むことにより，「同じユーザが選んでいるアイテム」のかわりに「同じタグがついているアイテム」をレコメンドするようにした変則的な集計セットです。
+{{{
+ bin/batch.pl --track=2
+}}}
+で，この集計を走らせることができます。(初回は2回叩く必要あり)
+
+また，clip_hybrid は、上記の「clip_simple (通常の協調フィルタリング)」と「clip_tags (タグベースの協調フィルタリング)」をだいたい6:4で混ぜ合わせて表示する，表示専用のセットです。
+(clip_simple と clip_tags の集計が終わっていれば結果を表示できるので，clip_hybrid 自体はバッチによる再集計を必要としません。)
+
+{{{
+  http://127.0.0.1/cicindela/recommend?op=for_item&set=clip_hybrid&item_id=39102
+}}}
+などで，異なる集計セットによるレコメンデーション結果を確認できます。
+
+
+=== バッチの設定方法の捕捉 ===
+
+上の2つの例で使った集計セットは，最初に [Install] で設定した集計用バッチスクリプト ( etc/service/cicindela_batch) では処理されません。
+ 
+設定に calculation_track => ... という指定のある集計セットは，明示的に --track= ... オプションを渡された時のみ処理されます。
+
+calculation_track の指定を外すか，
+{{{
+ sudo ln -s /home/cicindela/etc/service/cicindela_batch_track1 /service/cicindela_batch_track1
+ sudo ln -s /home/cicindela/etc/service/cicindela_batch_track2 /service/cicindela_batch_track2
+}}}
+などとすることで，自動的に再計算を走らせることができるようになります。
+
+batch.pl は集計セットを順にひとつずつ処理しますが，このようにすることで複数の集計セットのアップデートを同時に走らせることができるようになります。時間のかかる集計セットと，軽いけれど頻繁に更新する必要がある集計セットとを並列で走らせておく場合に使います。
+
+※「refresh interval => (再計算が行われるまでの秒数)」の設定値が小さすぎると，無駄に高頻度で再計算をはじめるのでここも調整しておく必要があります。
 
 
 == movielens dataset を使ったサンプルセットアップ ==
+
 
 = EN =
