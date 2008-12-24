@@ -1,4 +1,5 @@
 #summary configの書き方例 / config examples
+#labels Phase-Implementation
 
 <wiki:toc max_depth="2" />
 
