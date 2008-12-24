@@ -66,5 +66,20 @@ Add the following line at the end of httpd.conf
 
 cicindela's path may be different depending on your installation.
 
+== install daemontools ==
 
-..documentation not finished yet
+Follow the instructions on:
+ * http://cr.yp.to/daemontools/install.html
+
+== setup daemontools ==
+
+main calculation batch
+{{{
+ sudo ln -s /home/cicindela/etc/service/cicindela_batch /service/cicindela_batch
+}}}
+
+insert buffer flusher
+{{{
+ sudo ln -s /home/cicindela/etc/service/cicindela_flush_buffers /service/cicindela_flush_buffers
+}}}
+
