@@ -10,6 +10,6 @@
 
 We messed up the repository and do not even want you to look at the revision history.
 
-== why is it so poorly domentated ? ==
+== why is it so poorly documentated ? ==
 
-We are working on it.
+We are working on it...
