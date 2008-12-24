@@ -4,11 +4,10 @@
 
 = JP =
 
+ライブドア，あるいは他者が提供する，デモ用のデータセットを利用して動作確認をすることができます。
 ([Install] を先に済ませてあることが前提です。)
 
-ライブドア，あるいは他者が提供するデモ用のデータセットを利用するための各種ファイルが用意してあります。
-
-以下のデモセットアップを試す場合は，以下の操作で misc/ 以下を demo_data ブランチに切り替えて下さい。
+以下のデモセットアップを試す場合は，この操作で misc/ 以下を demo_data ブランチに切り替えて下さい。
 {{{
  cd /home/cicindela
  svn switch http://cicindela2.googlecode.com/svn/branches/demo_data/misc misc
@@ -47,13 +46,15 @@ cicindela は，集計セット毎に別々のデータベースを利用しま�
 などをしといた方がいいかもしれません。
 
 === データのインポート ===
-
-※ローダースクリプトを利用するには perl モジュール Text:CSV_XS が必要です。
 {{{
  cd misc/clip_data
  gunzip ldclip_dataset_s.csv.gz
- perl importer.pl --db_name=cicindela_clip_db | /usr/local/mysql/bin/mysql -uroot
+ perl importer.pl  --work_dir=`pwd` | /usr/local/mysql/bin/mysql -uroot
 }}}
+
+※ローダースクリプトを利用するには perl モジュール Text:CSV_XS が必要です。
+
+※このスクリプトは中間データを work_dir に書き出したあと「load data infile ... 」を mysql に渡します。従って，work_dir は mysql ユーザから参照可能である必要があります。
 
 === 設定 ===
 
@@ -61,6 +62,8 @@ lib/Cicindela/Config/`_`common.pm の中に，clip のデータを利用する�
 
 該当部分 ("## sample settings for ldclip_dataset " というコメントの直後から，"## sample
 settings for movielens dataset " というコメントの直前まで) のコメントアウトを外して下さい。
+
+必要に応じて，datasource => [ ] (データベース接続用の設定値) の行などを編集して下さい。
 
 === clip_simple 集計セットの手動起動 ===
 
@@ -145,6 +148,49 @@ batch.pl は集計セットを順にひとつずつ処理しますが，この�
 
 
 == movielens dataset を使ったサンプルセットアップ ==
+
+=== データベース & テーブル作成 ===
+{{{
+ cd misc
+ perl create_init_sql.pl --db_name=cicindela_movielens_db
+     --grant_user=cicindela --grant_host=% --grant_pass=japana | /usr/local/mysql/bin/mysql -uroot
+}}}
+
+=== データの取得と読み込み ===
+
+以下のサイトからデータセット (1,000,000 Data Set) を取得します。
+
+http://www.grouplens.org/node/73
+
+解凍したデータを misc/movielens_data/ 以下に置き，以下のようにしてロードします。。(読み込みに必要なのは ratings.dat のみです。)
+
+{{{
+ cd misc/movielens_data
+ perl importer.pl --work_dir=`pwd` | /usr/local/mysql/bin/mysql -uroot cicindela_movielens_db
+}}}
+
+=== 設定 ===
+
+lib/Cicindela/Config/`_`common.pm の中に，movielens のデータを利用するためのサンプル設定がコメントとして挿入されています。
+
+該当部分 ("## sample settings for movielens dataset " というコメントの直後にある 'movielens' => ... の部分) のコメントアウトを外して下さい。
+
+※ 'movielens' セットアップは二つ定義されています。少しずつ違った計算方法になっているので，どちらか片方ずつをコメントアウトして試して下さい。
+
+=== movielens 集計セットの手動起動 ===
+
+{{{
+ bin/batch.pl --track=3
+}}}
+(初回は二回叩く必要あり)
+
+log に "movielens done." と表示されるまで待ちます。
+
+=== movielens 集計セットの結果確認 ===
+{{{
+  http://127.0.0.1/cicindela/recommend?op=for_item&set=movielens&item_id=741
+}}}
+などで結果を確認できます。clip のところでも述べたように，cicindela は基本的には id のみしか返しません。id と実際のタイトルの対応は，ダウンロードしたデータセット内にある movies.dat で確認して下さい。
 
 
 = EN =
