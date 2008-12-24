@@ -1,5 +1,22 @@
 #summary How to setup
 
+<wiki:toc max_depth="2" />
+= JP =
+
+== チェックアウト ==
+{{{
+ cd /home
+ svn checkout http://cicindela2.googlecode.com/svn/trunk/ cicindela
+}}}
+インストール用のスクリプトは(いまのところ)ありません。プログラムはワーキングディレクトリ上で動作します。
+
+諸般の事情により，cicindela のチェックアウトディレクトリ = /home/cicindela , perl = /usr/bin/perl がハードコードされている部分があります。
+
+もし，別のディレクトリや
+
+
+= EN =
+
 == checkout cicindela ==
 
 {{{
@@ -82,3 +99,28 @@ insert buffer flusher
 {{{
  sudo ln -s /home/cicindela/etc/service/cicindela_flush_buffers /service/cicindela_flush_buffers
 }}}
+
+== setup log ==
+
+All logs (from batch scripts and modperl handlers) are written into /home/cicindela/var/logs/log.txt.
+
+Log level and format can be configured by editing /home/cicindela/etc/log.conf.
+Please refer to Log::Log4perl's documentation for details.
+
+The log file must be accessible by both apache and batch. You may need to do the following:
+{{{
+ touch /home/cicindela/var/logs/log.txt
+ chmod a+rw /home/cicindela/var/logs/log.txt
+}}}
+
+
+To rotate the logs daily, you can add
+{{{
+ /home/cicindela/var/logs/log.txt {
+   daily
+   create 0666 (user) (group)
+   rotate 2
+ }
+}}}
+in /etc/logrotate.conf.
+
