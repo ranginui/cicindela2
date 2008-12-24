@@ -4,9 +4,9 @@
 
 == シンプルな設定例1 ==
 
-  * 解析には Filters::PicksExtractor -> Filters::InverseUserFrequency -> Filters::ItemSimilarities を順に適用する。
-  * レコメンドには (Filters::ItemSimilarities と対になっている) Recommender::ItemSimilarities を利用する
-  * 一時間毎にレコメンデーションを再計算する
+ * 解析には Filters::PicksExtractor -> Filters::InverseUserFrequency -> Filters::ItemSimilarities を順に適用する。
+ * レコメンドには (Filters::ItemSimilarities と対になっている) Recommender::ItemSimilarities を利用する
+ * 一時間毎にレコメンデーションを再計算する
 {{{
     'test' => {
         datasource =>  [ 'dbi:mysql:cicindela_test;host=localhost', 'cicindela', 'japana' ],
@@ -22,8 +22,8 @@
 
 == フィルタのオプションを指定する ==
 
-  * 各フィルタに引数を渡すことで、デフォルトの設定値(入出力テーブル名とか、係数とか)をオーバーライドできる。
-  * 以下は、PicksExtractor フィルタの出力テーブルを "extracted_picks" から "extracted_picks2" に変更した例。PicksExtractor  フィルタの出力先がかわれば、その出力を利用する InverseUserFrequency フィルタや ItemSimilarities フィルタの入力もあわせて定義してやる必要がある点に注意。
+ * 各フィルタに引数を渡すことで、デフォルトの設定値(入出力テーブル名とか、係数とか)をオーバーライドできる。
+ * 以下は、PicksExtractor フィルタの出力テーブルを "extracted_picks" から "extracted_picks2" に変更した例。PicksExtractor  フィルタの出力先がかわれば、その出力を利用する InverseUserFrequency フィルタや ItemSimilarities フィルタの入力もあわせて定義してやる必要がある点に注意。
 {{{
     'test' => {
         datasource =>  [ 'dbi:mysql:cicindela_test;host=localhost', 'cicindela', 'japana' ],
@@ -39,14 +39,14 @@
 
 == 複数のセッティングを同居させる==
 
-  * 各セッティングは独立した datasource を持つことができるので、複数のサービスに対するレコメンデーションを一カ所に同居させられる。
-  * 後の例にもあるように、おなじサービスに対するレコメンデーションを異なる設定で複数出力させ、最後に合成する、といったこともできる。
-  * slave_datasource を定義しておけば、(読み出し専用の) Recommender クラスはスレーブ側を使ってくれる。
-  * ただし、解析は単一の batch.pl プロセスが順番に行っているため、解析に時間がかかるセッティングが多数定義してあると、refresh_interval の通りの間隔で更新が行われないこともある。
-  * ひとつの解析に大量のメモリ/CPUリソースが使われるため、単純に batch.pl を同時に複数実行するのは解決にはならない。インプリメンテーション(lock の仕組みとか) 的にも、そのような状況は想定していない。
+ * 各セッティングは独立した datasource を持つことができるので、複数のサービスに対するレコメンデーションを一カ所に同居させられる。
+ * 後の例にもあるように、おなじサービスに対するレコメンデーションを異なる設定で複数出力させ、最後に合成する、といったこともできる。
+ * slave_datasource を定義しておけば、(読み出し専用の) Recommender クラスはスレーブ側を使ってくれる。
+ * ただし、解析は単一の batch.pl プロセスが順番に行っているため、解析に時間がかかるセッティングが多数定義してあると、refresh_interval の通りの間隔で更新が行われないこともある。
+ * ひとつの解析に大量のメモリ/CPUリソースが使われるため、単純に batch.pl を同時に複数実行するのは解決にはならない。インプリメンテーション(lock の仕組みとか) 的にも、そのような状況は想定していない。
  * そういうのが必要な場合にはcalculation_track というオプションを利用する。例えば calculation_track=>1と calculation_track=>2 の二つを定義し、二種類の batch.pl  (それぞれ--track=1 , --track=2 オプション付き) を並列実行させておくと、最大二つの解析を並走させられる。時間がかかる処理をtrack1に、軽量で高頻度に更新しなければならない処理をtrack2に振り分けておけば、track1の処理が長考に入ってもtrack2側は影響を受けない。
-  * 以下は、 実際に clip で使っている例。3時間毎に更新される 「clip」が track1 で走っている裏で、「clip_express」が track2 で10分毎に走っている。
-  *  ※clip も clip_express も同じ datasource を使っているので、clip が picks->extracted_picks->iuf->item_similarities->item_similarities_online という中間テーブルを順次利用するのに対して、clip_express 側は picks->extracted_picks2->iuf2->item_similarities_ex->item_similarities_ex_online というふうに使うテーブルを分けているのに注意。
+ * 以下は、 実際に clip で使っている例。3時間毎に更新される 「clip」が track1 で走っている裏で、「clip_express」が track2 で10分毎に走っている。
+ *  ※clip も clip_express も同じ datasource を使っているので、clip が picks->extracted_picks->iuf->item_similarities->item_similarities_online という中間テーブルを順次利用するのに対して、clip_express 側は picks->extracted_picks2->iuf2->item_similarities_ex->item_similarities_ex_online というふうに使うテーブルを分けているのに注意。
 {{{
     'clip' => {
         datasource =>  [ 'dbi:mysql:clip;host=master-host', 'cicindela', 'japana' ],
@@ -101,14 +101,14 @@
 
 == 複数のセッティングで計算したレコメンデーション結果を合成する。==
 
-  * Recommender::Hybrid クラスは、複数のセッティングを合成するために使う。
-  * 合成したいセッティング名と、factor(係数) を settings オプションに順に書いておく。
-  * 各セッティングが出力したレコメンデーション結果に、それぞれのfactorが掛け合わされて合成される。片方のfactorが0.6, もう一方が0.4なら、結果が6:4の重みで合成されるということ。
-  * 各セッティングは上から順に評価され、「有効なレコメンデーションが得られたセッティングのfactorの合計」が1を超えたら、そこで評価は終了する。つまり、すべてのfactorを1にすると、「一番上のセッティングで結果が得られなければ次のセッティングを使う。それでも結果が空ならその次のセッティングを...」という意味になる。
-  *  下は clip の本番で利用している設定。
+ * Recommender::Hybrid クラスは、複数のセッティングを合成するために使う。
+ * 合成したいセッティング名と、factor(係数) を settings オプションに順に書いておく。
+ * 各セッティングが出力したレコメンデーション結果に、それぞれのfactorが掛け合わされて合成される。片方のfactorが0.6, もう一方が0.4なら、結果が6:4の重みで合成されるということ。
+ * 各セッティングは上から順に評価され、「有効なレコメンデーションが得られたセッティングのfactorの合計」が1を超えたら、そこで評価は終了する。つまり、すべてのfactorを1にすると、「一番上のセッティングで結果が得られなければ次のセッティングを使う。それでも結果が空ならその次のセッティングを...」という意味になる。
+ *  下は clip の本番で利用している設定。
   * - セッティング「clip_hybrid_stage2」の結果を優先的に利用する。もしclip_hybrid_stage2の結果が空なら、セッティング「clip_express」の結果を利用する。
   * - 一方、「clip_hybrid_stage2」はそれ自体がセッティング「clip」と「clip_tags」の結果を6:4で合成したhybrid。
-  *  結局、動作としては「『clip (通常のレコメンデーション)』と『clip_tags (タグから算出したレコメンデーション)』の結果を6:4で合成したもの (『clip_hybrid_stage2』) を使う。ただし、それが得られない場合は『clip_express (直近のデータだけを対象に、高速に、高頻度にレコメンデーションを再計算するモード) 』の結果を使う」となる。
+ *  結局、動作としては「『clip (通常のレコメンデーション)』と『clip_tags (タグから算出したレコメンデーション)』の結果を6:4で合成したもの (『clip_hybrid_stage2』) を使う。ただし、それが得られない場合は『clip_express (直近のデータだけを対象に、高速に、高頻度にレコメンデーションを再計算するモード) 』の結果を使う」となる。
 {{{
     'clip_hybrid' => {
         datasource =>  [ 'dbi:mysql:clip;host=master-host', 'cicindela', 'japana' ],
@@ -135,8 +135,7 @@
 
 == レコメンデーションの候補をカテゴリで絞る ==
 
-  * Recommender::ItemSimilarities::SameCategoryOnly を使うと、item to item の候補が、同じカテゴリに所属するアイテムのみになる。
+ * Recommender::ItemSimilarities::SameCategoryOnly を使うと、item to item の候補が、同じカテゴリに所属するアイテムのみになる。
 
 
 [あとでもっと書く]
-
