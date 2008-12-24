@@ -1,4 +1,4 @@
-#summary 脇道ばかりのFAQ / mainly useless FAQs
+#summary 意味のないFAQ / FAQs, mostly useless
 
 <wiki:toc max_depth="2" />
 
@@ -34,10 +34,6 @@ We would also like to mention that, although it looks as if Cicindela is leading
 == what happened to cicindela "1" ? ==
 
 We messed up the repository and do not even want you to look at the revision history.
-
-== why is it so poorly documented ? ==
-
-We are working on it...
 
 == how do you pronounce "cicindela" ? ==
 
