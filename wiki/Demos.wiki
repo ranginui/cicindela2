@@ -211,7 +211,7 @@ clip のところでも述べたように，cicindela は基本的には id の�
 
 = EN =
 
-A sample dataset is included in the distribution. There also is a loader script and sample configurations to be used with grouplens dataset.
+A sample dataset from livedoor clip (a social bookmark service, mainly in Japanese) is included in the distribution. There also is a loader script and sample configurations to be used with grouplens dataset.
 
 (Installation of prerequisites and cicindela basic setup should already be finshed. Please read [Install] first.)
 
@@ -221,7 +221,7 @@ A sample dataset is included in the distribution. There also is a loader script 
  svn switch http://cicindela2.googlecode.com/svn/branches/demo_data/misc misc
 }}}
 
-== sample setup with movielens datasets ==
+== sample setup with movielens dataset ==
 
 === setup database and tables ===
 
