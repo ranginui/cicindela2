@@ -1,0 +1,103 @@
+#summary web API 経由でデータを入出力するには / how to input or output data via web API
+
+<wiki:toc max_depth="3" />
+
+= JP = 
+
+== 基本のきまりごと ==
+
+ * ユーザid, アイテムid などはすべて整数。サービス側であらかじめ付与し、int(11) を超える可能性がある場合はラウンド処もしておく
+  *  ※ user id に mod_usertrack のcookie値や livedoor_id を使いたい場合用に、cicindela側で文字id->数値id変換をやってくれる機能も一応あります。
+ * サービス毎 (スコアリングモード毎) にひとつ「集計セット名」が与えられるので、リクエストには必ずそのセット名をつける
+
+== データの蓄積 ==
+
+ユーザがアイテムを選択したり評価をつけた場合に、以下のURLに対してGETリクエストを投げて下さい。成功時には空のレスポンス(204 NO CONTENT) が返ります。エラーの場合は 400系のレスポンス(たいてい 400 BAD REQUEST か 404 NOT FOUND) が返ります。
+
+以下の3種類の操作が可能です。
+
+===「あるユーザがあるアイテムを選択した」===
+
+ユーザがあるアイテムを「clipした」とか「訪問した」というように、ユーザが明示的にレーティングを行わないタイプの場合はこのフォーマット。
+{{{
+  http://[base_url]/record?set=[セット名]&op=insert_pick&user_id=[ユーザid]&item_id=[アイテムid]
+}}}
+※ base_url は初期状態では http://localhost/cicindela です。
+
+*↓↑サービスの性質にあわせて、これか、下の「あるユーザがあるアイテムをに○点の評価をつけた」のどちらか一方のみを選択して使います。*
+*ひとつの集計セットでratingsとpicks両方を使っても意味はありません。*
+
+===「あるユーザがあるアイテムをに○点の評価をつけた」===
+
+ユーザが明示的に点数をつけるタイプの場合は以下のフォーマットを使う。rate は整数。
+{{{
+ http://[base_url]/record?set=[セット名]&op=insert_rating&user_id=[ユーザid]&item_id=[アイテムid]&rating=[評価]
+}}}
+
+===「あるユーザがあるアイテムにあるタグをつけた」===
+{{{
+ http://[base_url]/record?set=[セット名]&op=insert_tag&user_id=[ユーザid]&item_id=[アイテムid]&tag_id=[タグid]
+}}}
+
+
+==その他の各種データ操作==
+
+===「あるアイテムをあるカテゴリに所属させる」===
+※カテゴリは、中身的にはタグとほとんど同じもの。ただし，以下の点でタグと異なる働きをします。
+
+ *  タグと違って、ユーザは関係なし。「このアイテムがこのカテゴリに所属する」という関係性だけ。
+ * 「同じカテゴリに所属するアイテムだけを候補にする」「指定したカテゴリのアイテムだけを候補にする」といったタイプのRecommender が選べる。
+
+{{{
+ http://[base_url]/record?set=[セット名]&op=set_category&item_id=[アイテムid]&category_id=[カテゴリid]
+}}}
+タグと同じような構造なので、ひとつのアイテムに複数のカテゴリを割り当ててもOK
+
+===「あるユーザがあるアイテムに[興味ありません]マークをつけた」===
+ *  単にレコメンド結果から取り除かれるだけで，「マイナスの評価をつける」のと同じではありません。
+ * そもそも，レーティング済/選択済のアイテムもおすすめには含まれないので，可能な限りこちらではなく insert_pick/insert_rating の方を使うべきです。
+ *  反映されるまでに少しタイムラグがあるので，アプリケーション側でもセッションに情報をもっておいて，表示から隠すなどしたほうがよいでしょう。
+
+{{{
+ http://[base_url]/record?set=[セット名]&op=insert_uninterested&user_id=[ユーザid]&item_id=[アイテムid]
+}}}
+
+
+===  セットしたデータを取り消す===
+{{{
+ http://[base_url]/record?set=[セット名]&op=delete_pick&user_id=[ユーザid]&item_id=[アイテムid]
+
+ http://[base_url]/record?set=[セット名]&op=delete_rating&user_id=[ユーザid]&item_id=[アイテムid]
+
+ http://[base_url]/record?set=[セット名]&op=delete_tag&user_id=[ユーザid]&item_id=[アイテムid]&tag_id=[タグid]
+
+ http://[base_url]/record?set=[セット名]&op=delete_uninterested&user_id=[ユーザid]&item_id=[アイテムid]
+
+ http://[base_url]/record?set=[セット名]&op=remove_category&item_id=[アイテムid]&category_id=[カテゴリid]
+}}}
+
+
+== レコメンデーション取得 ==
+
+レコメンデーションを取得するには、以下のURLに対してリクエストを投げてください。おすすめアイテムのidが、 関連の高い順に改行区切りテキスト形式で返されます。
+
+=== 特定アイテムに対するレコメンデーション(関連アイテム)取得 (=item to item) ===
+
+関連アイテムのidをデフォルトで10件まで返します。&limit=[件数] で件数を指定可能。
+{{{
+ http://[base_url]/recommend?set=[セット名]&op=for_item&item_id=[アイテムid]
+}}}
+
+=== 特定ユーザに対するレコメンデーション取得 (=user to item) ===
+
+指定したユーザに対するおすすめをデフォルトで20件まで返します。そのユーザがすでに選択済み(/評価済み) のアイテムはおすすめに含まれません。 &limit=[件数] で件数を指定可能。
+{{{
+ http://[base_url]/recommend?set=[セット名]&op=for_user&user_id=[ユーザid]
+}}}
+
+=== お隣ユーザ取得 (user to user) ===
+
+指定したユーザに似たユーザをデフォルトで20件まで返します。&limit=[件数] で件数を指定可能。
+{{{
+ http://[base_url]/recommend?set=[セット名]&op=similar_users&user_id=[ユーザid]
+}}}
