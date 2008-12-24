@@ -1,4 +1,4 @@
-#summary FAQ
+#summary 脇道ばかりのFAQ / mainly useless FAQs
 
 <wiki:toc max_depth="2" />
 
