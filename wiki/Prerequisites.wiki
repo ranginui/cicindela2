@@ -1,4 +1,4 @@
-# modules / programs required before installation
+#summary modules / programs required before installation
 
 = Perl (>=5.8) =
 
@@ -26,4 +26,3 @@ http://perl.apache.org/download/index.html
 =  daemontools =
 
 http://cr.yp.to/daemontools/install.html
-
