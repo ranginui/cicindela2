@@ -74,7 +74,7 @@ settings for movielens dataset " というコメントの直前まで) のコメ
 を叩くと，設定ファイル中， "calculation_track => 1" となっている集計セット  (この例では，' clip_simple' という名前の集計セット) が処理されます。
 
 ただし，初回  (=「前回の集計終了時刻」が空のとき) は何も起きませんので，上のコマンドを二回叩いて下さい。
-ログは log/var/log.txt に書き出されます。
+ログは var/logs/log.txt に書き出されます。
 
 log に "clip_simple done." と表示されるまで待ちます。(ある程度時間がかります。)
 
@@ -287,4 +287,3 @@ The response is a simple ,newline-separated list of ids.
 Basicly, cicindela only deals with integer user_ids and item_ids. You should refer to the original data file 'movies.dat' to find out the corresponding movies titles.
 
 In the above example, item id 741 was  "Ghost in the shell"，id 3000 ="Princess Mononoke" , id 1274= "Akira " and  id 29 = "City of Lost Children". Result may differ depending on which of the two settings you have selected, but this one seems pretty OK.
-
