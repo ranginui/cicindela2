@@ -1,4 +1,5 @@
 #summary デモ用データセットを用いたクイックスタート / quick start with demo datasets
+#labels Phase-Deploy,Featured
 
 <wiki:toc max_depth="2" />
 
