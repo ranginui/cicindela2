@@ -1,8 +1,114 @@
-#summary Setting up cicindela with demo datasets for quick start
+#summary Setting up cicindela with demo datasets for a quick start
 
 = JP =
+
+ライブドア，あるいは他者が提供するデモ用のデータセットを利用するための各種ファイルが用意してあります。
+
+以下のデモセットアップを試す場合は，以下の操作で misc/ 以下を demo_data ブランチに切り替えて下さい。
+{{{
+ cd /home/cicindela
+ svn switch http://cicindela2.googlecode.com/svn/branches/demo_data/misc misc
+}}}
+
+misc/clip_data 以下には livedoor clip の公開データ (の一部) を書き出したcsvデータと，そのロード用のスクリプトがあります。
+
+misc/movielens_data 以下には，project grouplens が公開しているデータセットを利用するためのローダースクリプトがあります。(movielens のデータセット自体は別途ダウンロードする必要があります。)
+
+また，lib/Cicindela/Config/_common.pm に，上の二つを利用するためのサンプル設定がコメントとして挿入してありますので，これらを必要に応じてコメントアウトして使います。
+
 == livedoor clip dataset を使ったサンプルセットアップ ==
+
+=== データベース & テーブル作成 ===
+
+cicindela は，集計セット毎に別々のデータベースを利用します。
+作成するデータベース名を cicindela_clip_db ，mysql のパスを /usr/local/mysql/bin/mysql の場合，新規データベースのセットアップは以下のようになります。
+{{{
+ cd misc
+ perl create_init_sql.pl --db_name=cicindela_clip_db | /usr/local/mysql/bin/mysql -uroot
+}}}
+
+
+専用のユーザを作成する場合は，以下のように同時に指定することも出来ます。
+{{{
+ perl create_init_sql.pl --db_name=cicindela_clip_db
+     --grant_user=cicindela --grant_pass=japana --grant_host=% | /usr/local/mysql/bin/mysql -uroot 
+}}}
+この場合は，データベースとテーブルのセットアップに加えて
+{{{
+  grant all on cicindela_clip_db.* to "cicindela"@"%" identified by "japana";
+  flush privileges;
+}}}  
+が発行されます。
+
+デフォルトのワイルドカードのユーザが権限設定をややこしくする場合があるので，必要に応じて
+{{{
+ SQL> drop user ""'@"localhost";
+ SQL> flush privileges;
+}}}
+などをしといた方がいいかもしれません。
+
+=== データのインポート ===
+
+※ローダースクリプトを利用するには perl モジュール Text:CSV_XS が必要です。
+{{{
+ cd misc/clip_data
+ gunzip ldclip_dataset_s.csv.gz
+ perl importer.pl --db_name=cicindela_clip_db | /usr/local/mysql/bin/mysql -uroot
+}}}
+
+=== 設定 ===
+
+lib/Cicindela/Config/_common.pm の中に，clip のデータを利用するためのサンプル設定がコメントとして挿入されています。
+
+該当部分 ("## sample settings for ldclip_dataset " というコメントの直後から，"## sample
+settings for movielens dataset " というコメントの直前まで) のコメントアウトを外して下さい。
+
+== clip_simple 集計セットの手動起動 ==
+
+{{{
+ bin/batch.pl --track=1
+}}}
+を叩くと，設定ファイル中， "calculation_track => 1" となっている集計セット  (この例では，' clip_simple' という名前の集計セット) が処理されます。
+
+ただし，初回  (=「前回の集計終了時刻」が空のとき) は何も起きませんので，上のコマンドを二回叩いて下さい。
+ログは log/var/log.txt に書き出されます。
+
+log に "clip_simple done." と表示されるまで待ちます。(ある程度時間がかります。)
+
+== clip_simple 集計セットの結果確認 ==
+
+{{{
+ /usr/local/apache2/bin/apachectl start
+}}}
+でmodperlを起動したあと，
+{{{
+  http://127.0.0.1/cicindela/recommend?op=for_item&set=clip_simple&item_id=39102
+}}}
+などを確認します。
+
+正常に動いている場合は 
+{{{
+ 49425
+ 44936
+ 42886
+ ...
+}}}
+といった表示になるはずです。これが，アイテムid=1 のページに対するレコメンデーション (「このページを見ている人はこのページも見ています」の結果です。)
+
+cicindela はユーザやアイテムなどをすべて id値のみで扱っているので，それぞれの id が何を意味していたかは，cicindela を利用するアプリケーション側で知っておく必要があります。
+
+(user_id, item_id に数値以外のものを指定する方法もありますが，基本的には，整数idを利用するように設計されています。)
+
+「データのインポート」の手順の際に，misc/clip_data 以下に pages.txt という中間ファイルが書き出されていますので，これを元にそれぞれのアイテムid が実際にはどの url を表しているのかを確認して下さい。
+
+ちなみにアイテムid 39102 は
+「livedoor reader パーフェクトガイド - livedoor ディレクター Blog」http://blog.livedoor.jp/ld_directors/archives/50735409
+です。
+レコメンドのトップ2つのid 49425 と 44936 は、いずれも livedoor reader のメインの開発者のブログである http://mala.nowa.jp 内のエントリでした。
+
+
 
 == movielens dataset を使ったサンプルセットアップ ==
 
 = EN =
+
