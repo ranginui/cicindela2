@@ -1,0 +1,70 @@
+#summary README
+
+== checkout cicindela ==
+
+{{{
+ cd /home
+ svn checkout http://cicindela2.googlecode.com/svn/trunk/ cicindela
+}}}
+Program runs directly on the working directory. No installation scripts (currently). 
+
+Cicindela assumes *project root dir = /home/cicindela* and *perl binary = /usr/bin/perl*, and are hard coded in the source codes.
+
+If you happen to have checked out the source code in directories other than '/home/cicindela', or have perl installed somewhere other than '/usr/bin/perl', there still is a work around.
+
+The script 'misc/substitute_project_paths.pl' can search and replace all occurences of those paths in-place. (yes, we know it's absurd)
+{{{
+ cd misc
+ perl substitute_project_paths.pl --perl-path=/usr/local/bin/perl --cicindela_home=/where/you/have/checkedout/cicindela
+}}}
+
+== install mysql (>=5.0)  ==
+ 
+Follow the instructions on
+ * http://dev.mysql.com/downloads/mysql/5.1.html
+
+== configure mysql  ==
+{{{
+ ln -s /home/cicindela/etc/mysql/my.cnf /usr/local/mysql/my.cnf
+}}}
+
+cicindela and mysql's local conf paths may be different depending on your installation.
+
+== install perl prerequisite modules ==
+
+(You'd most likely have perl already. just make sure it is above ver 5.8).
+
+ * DBI
+ * DBD::mysql
+ * Ima::DBI
+ * Time::Piece
+ * Log::Log4perl
+ * Module::Pluggable
+ * Class::Singleton
+
+install the following modules by hand
+
+(or do something like..)
+{{{
+ sudo perl -MCPAN install -e "install DBI; install DBD::mysql; intsall Ima::DBI;
+    install Time::Piece; install Log::Log4perl;
+    intall Module::Pluggable; install Class::Singleton;" 
+}}}
+
+== install apache + modperl ==
+
+Follow the instructions in the following pages:
+ * http://httpd.apache.org/download.cgi
+ * http://perl.apache.org/download/index.html
+
+== setup modperl conf ==
+
+Add the following line at the end of httpd.conf
+{{{
+ Include /home/cicindela/etc/httpd/modperl.conf
+}}}
+
+cicindela's path may be different depending on your installation.
+
+
+..documentation not finished yet
