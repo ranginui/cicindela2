@@ -6,9 +6,9 @@
  cd /home
  svn checkout http://cicindela2.googlecode.com/svn/trunk/ cicindela
 }}}
-Program runs directly on the working directory. No installation scripts (currently). 
+*Program runs directly on the working directory.* No installation scripts (currently). 
 
-Cicindela assumes *project root dir = /home/cicindela* and *perl binary = /usr/bin/perl*, and are hard coded in the source codes.
+*Cicindela assumes project root dir = /home/cicindela* and *perl binary = /usr/bin/perl*, and are hard coded in the source codes.
 
 If you happen to have checked out the source code in directories other than '/home/cicindela', or have perl installed somewhere other than '/usr/bin/perl', there still is a work around.
 
