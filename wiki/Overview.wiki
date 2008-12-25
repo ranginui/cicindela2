@@ -7,7 +7,7 @@
 
 == URLを叩くだけの簡単なAPI ==
 
-Cicindela は、web API での入出力を基本とした汎用レコメンデーションエンジンです。
+Cicindela は、MySQL上のデータと，それを参照する modperl の web API，そして計算処理を行う perl のバッチとで構成されています。 入出力は基本的には URL に対してリクエストを送ることで行います。
 
 Amazon の *「この商品を買った人はこの商品も買っています」* も、*「このページを見た人はこのページも見ています」* も、簡単にいうと
 
@@ -65,7 +65,7 @@ Cicindela に *「ユーザ1がアイテム2を選択した」* という情報�
 
 == simple & fast web API ==
 
-Cicindela is designed to input/output data via its web API, running on modperl.
+Cicindela is designed to input/output data via its web API, running on modperl. Data are stored on MySQL and are then periodically updated by calculation batch scripts.
 
 Most recommendations seen on the web, such as amazon's "customers who bought this item also bought..", can be generalized as:
 
@@ -107,4 +107,3 @@ This sequence is called "filter chain", and is built on a highly customizable pl
 In addition to the simple "who selected whats" type of data mentioned above, cicindela can also handle data such as ratings, categories and tags.
 
 Please refer to [FilterChain] [Examples] for details (document unfinished...)
-
