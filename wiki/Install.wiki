@@ -69,8 +69,11 @@ perl はたいていインストール済だと思いますが，バージョン
 
 == daemontoolsのインストール ==
 
+※daemon tools は，入力バッファをフラッシュしたり，定期的に新しいデータで中間集計テーブルを再計算させるために使います。従って，新たなデータが次々に入ってこない場合 ( [Demos] の例など，固定のデータセットを読み込ませて結果を見るだけの場合など) はこのステップをスキップしても構いません。
+
 以下のサイトからdaemontoolsを取得し，インストールします。
  * http://cr.yp.to/daemontools/install.html
+
 
 === daemontoolsの設定 ===
 
@@ -179,6 +182,8 @@ Add the following line at the end of httpd.conf
 cicindela's path may be different depending on your installation.
 
 == install daemontools ==
+
+(daemontools is used to flush input buffers, and to periodically kick the main calculation batch to refresh the pre-calculated tables. You may skip this part if you are not expecting further incoming data, or just trying to run an analysis on a fix dataset such as the ones in [Demos] page)
 
 Follow the instructions on:
  * http://cr.yp.to/daemontools/install.html
