@@ -14,7 +14,7 @@
  cd /home/cicindela
  svn switch http://cicindela2.googlecode.com/svn/branches/demo_data/misc misc
 }}}
-
+switch に成功すると，misc/clip_data および misc/movielens_data というディレクトリができます。ライブドアクリップのサンプルデータセット (約11M) が含まれるため，スイッチには多少の時間を要することがあります。
 
 == livedoor clip dataset を使ったサンプルセットアップ ==
 
