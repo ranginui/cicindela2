@@ -183,7 +183,7 @@ cicindela's path may be different depending on your installation.
 
 == install daemontools ==
 
-(daemontools is used to flush input buffers, and to periodically kick the main calculation batch to refresh the pre-calculated tables. You may skip this part if you are not expecting further incoming data, or just trying to run an analysis on a fix dataset such as the ones in [Demos] page)
+*(daemontools is used to flush input buffers, and to periodically kick the main calculation batch to refresh the pre-calculated tables. You may skip this part if you are not expecting further incoming data, or just trying to run an analysis on a fix dataset such as the ones in [Demos] page)*
 
 Follow the instructions on:
  * http://cr.yp.to/daemontools/install.html
