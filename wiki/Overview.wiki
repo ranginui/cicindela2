@@ -102,8 +102,9 @@ There are various algorithms to obtain recommendations from huge set of "who sel
 
 Cicindela performs a set of calculations on its data, passing intermediate result of one analysis module to the next module until all the similarity matrices (or whatever it needs to emit the recommendations in an instant) are ready. Only then, all the necessary tables are swapped with old tables and made on-line.
 
-This sequence is called a "filter chain", and is built on a highly customizable plugin architecture. What kind of calculations and conversions a module (= filter) does, and how those filters are integrated, is left to your free will. (You don't even have to use this program for making recommendations !)
+This sequence is called "filter chain", and is built on a highly customizable plugin architecture. What kind of calculations and conversions a module (= filter) does, and how those filters are integrated, is left to your free will. (You don't even have to use this program for making recommendations !)
 
 In addition to the simple "who selected whats" type of data mentioned above, cicindela can also handle data such as ratings, categories and tags.
 
 Please refer to [FilterChain] [Examples] for details (document unfinished...)
+
