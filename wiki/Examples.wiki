@@ -138,10 +138,16 @@
 
 == レコメンデーションの候補をカテゴリで絞る ==
 
- * Recommender::ItemSimilarities::SameCategoryOnly を使うと、item to item の候補が、同じカテゴリに所属するアイテムのみになる。
+ * Recommender::ItemSimilarities::LimitCategory を使うと，リクエストで指定したカテゴリのみが推薦候補になる。
+ * Recommender::ItemSimilarities::SameCategoryOnly を使うと、item to item レコメンデーションの場合に，元のアイテムのカテゴリと同じカテゴリに所属するアイテムのみが推薦候補になる。
 
+前者は，「アダルトカテゴリにはアダルトの表新しか出しちゃダメ！」というふうに，推薦する範囲を表示時に厳しく制限したい場合用。
+
+後者は，例えばお店のレコメンドをするときに「同じ最寄り駅」とか「同じジャンル」の店を優先して表示したい場合用。
 
 [あとでもっと書く]
+
+
 
 = EN =
 
