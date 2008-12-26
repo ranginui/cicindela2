@@ -1,0 +1,8 @@
+#summary (デモデータを使わずに) 1からセットアップする / Starting a clean setup (without demo datasets)
+#labels Phase-Implementation
+
+<wiki:toc max_depth="2" />
+
+= JP =
+
+= EN =
