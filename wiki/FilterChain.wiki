@@ -1,4 +1,4 @@
-#summary 心臓部である FilterChain まわりの構造 / about FilterChain, the central architecture
+#summary 心臓部である FilterChain まわりの構造 / about FilterChain, the central architecture [not finished]
 #labels Phase-Implementation
 
 <wiki:toc max_depth="2" />
