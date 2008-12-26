@@ -1,4 +1,4 @@
-#summary web API 経由でデータを入出力するには / how to input or output data via web API
+#summary web API 経由でデータを入出力するには / how to input or output data via web API (not finished)
 #labels Phase-Design
 
 <wiki:toc max_depth="3" />
