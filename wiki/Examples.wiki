@@ -136,6 +136,30 @@
     },
 }}}
 
+== user id と item id を整数ではなく文字列で入出力する ==
+
+セッティングに
+{{{
+    'some_setting' => {
+       ...
+        use_user_char_id => 1,
+        use_item_char_id => 1,
+      ...
+}}}
+と書いておくと，整数値以外の user id, item id が利用できるようになります。
+
+この場合は数値idと文字列idの変換テーブルをcicindela側で持つことになります。user id や item id が無限に増えてしまう可能性がある場合 (例えば，アクセスログの cookie値をユーザid として入力し，おすすめページを生成する場合など) は，古すぎる変換テーブルを破棄するように
+{{{
+       ...
+        discard_user_id_char2int => '1 year',
+        discard_item_id_char2int => '1 year',
+      ...
+}}}
+といった設定をいれておくことを推奨します。上の例は 1年で破棄する設定です。('1 year' のところは，mysql の interval 指定で使う文字列を指定します。) 
+
+具体例は↓の「レコメンデーションの候補をカテゴリで絞る」のところを参照してください。
+
+
 == レコメンデーションの候補をカテゴリで絞る ==
 
  * Recommender::ItemSimilarities::LimitCategory を使うと，リクエストで指定したカテゴリのみが推薦候補になる。
@@ -144,6 +168,41 @@
 前者は，「アダルトカテゴリにはアダルトの商品しか出しちゃダメ！」というふうに，推薦する範囲を表示時に厳しく制限したい場合用。
 
 後者は，例えばお店のレコメンドをするときに「同じ最寄り駅」とか「同じジャンル」の店を優先して表示したい場合用。
+
+
+以下は，
+
+ * user id と item id が整数値ではなく文字列で送られて来る
+ * アイテムは1つ以上のカテゴリに所属する
+ * ユーザはアイテムにレーティングをつける
+ * 最新100万件のレーティング情報を元に，Slope one アルゴリズムで類似度マトリックスを生成
+ * レコメンデーション取得時に同時にカテゴリidも送信し，そのカテゴリに属するアイテムのみを推薦対象にする。
+ * 肥大化を防ぐため，レーティング情報，および，user id の整数値 <=> 文字列値の内部変換テーブルは1年で破棄する。
+
+というセッティングの例。(これも，あるサイトで実際に使用しているセッティングを多少簡略化したもの。)
+
+{{{
+    'limit_category' => {
+        datasource =>  [ 'dbi:mysql:cicindela;host=master-host', 'cicindela', 'japana' ],
+
+        use_user_char_id => 1,
+        use_item_char_id => 1,
+
+        discard_user_id_char2int => '1 year',
+        discard_ratins => '1 year',
+
+        filters => [
+            'CopyPicks::WithRatings',
+            'RatingsConverter::ZScore',
+            'RatingsConverter::InverseUserFrequency',
+            ['PicksExtractor::WithRatings', { in_table => 'converted_ratings', use_simple_set => 1, limit => 1000000 } ],
+            'SlopeOneDiffs',
+        ],
+        recommender => 'SlopeOneDiffs::LimitCategory',
+        refresh_interval => 60 * 60 * 1,
+    },
+}}}
+
 
 [あとでもっと書く]
 
