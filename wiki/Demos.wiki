@@ -216,7 +216,7 @@ A sample dataset from livedoor clip (a social bookmark service, mainly in Japane
 
 (Installation of prerequisites and cicindela basic setup should already be finshed. Please read [Install] first.)
 
-*switch the 'misc' directory to demo_data branch by the following command, to retrieve the attached datasets or dataset loader scripts.*
+*switch the 'misc' directory to demo_data branch by the following command, to retrieve the attached dataset or dataset loader scripts.*
 {{{
  cd /home/cicindela
  svn switch http://cicindela2.googlecode.com/svn/branches/demo_data/misc misc
@@ -302,6 +302,6 @@ The result should look something like this:
 }}}
 The response is a simple ,newline-separated list of ids.
 
-Basically, cicindela only deals with integer user ids and item ids. You should refer to the original data file 'movies.dat' to find out the corresponding movies titles.
+Basically, cicindela only deals with integer user ids and item ids. You should refer to the original data file 'movies.dat' to find out what the corresponding movies titles are.
 
 In the above example, item id 741 was  "Ghost in the shell"，id 3000 ="Princess Mononoke" , id 1274= "Akira " and  id 29 = "City of Lost Children". Result may differ depending on which of the two settings you have selected, but this one seems pretty OK, doesn't it ?
