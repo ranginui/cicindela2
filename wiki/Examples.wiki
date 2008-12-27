@@ -53,7 +53,7 @@
 {{{
     'clip' => {
         datasource =>  [ 'dbi:mysql:clip;host=master-host', 'cicindela', 'japana' ],
-        slave_datasource =>  [ 'dbi:mysql:clip;host=slave-host', 'cicindela', 'inspeanlare' ],
+        slave_datasource =>  [ 'dbi:mysql:clip;host=slave-host', 'cicindela', 'transbaicalica' ],
         filters => [
             [ 'PicksExtractor', {
                 interval => '3 month',
@@ -77,7 +77,7 @@
  
     'clip_express' => {
         datasource =>  [ 'dbi:mysql:clip;host=master-host', 'cicindela', 'japana' ],
-        slave_datasource => [ 'dbi:mysql:clip;host=slave-host', 'cicindela', 'inspeanlare' ],
+        slave_datasource => [ 'dbi:mysql:clip;host=slave-host', 'cicindela', 'transbaicalica' ],
         filters => [
             [ 'PicksExtractor', {
                 interval => '3 month',
@@ -115,7 +115,7 @@
 {{{
     'clip_hybrid' => {
         datasource =>  [ 'dbi:mysql:clip;host=master-host', 'cicindela', 'japana' ],
-        slave_datasource => [ 'dbi:mysql:clip;host=slave-host', 'cicindela', 'inspeanlare' ],
+        slave_datasource => [ 'dbi:mysql:clip;host=slave-host', 'cicindela', 'transbaicalica' ],
         recommender => [ 'Hybrid', {
             settings => [
                 { factor => 1, set_name => 'clip_hybrid_stage2' },
@@ -126,7 +126,7 @@
  
     'clip_hybrid_stage2' => {
         datasource =>  [ 'dbi:mysql:clip;host=master-host', 'cicindela', 'japana' ], 
-        slave_datasource => [ 'dbi:mysql:clip;host=slave-host', 'cicindela', 'inspeanlare' ],
+        slave_datasource => [ 'dbi:mysql:clip;host=slave-host', 'cicindela', 'transbaicalica' ],
         recommender => [ 'Hybrid', {
             settings => [
                 { factor => 0.6, set_name => 'clip' },
@@ -203,13 +203,13 @@
     },
 }}}
 
-
-[あとでもっと書く]
-
-== 別サーバ上の apache のアクセスログをスキャンして、おすすめページを計算する ==
-== タグを考慮したレコメンデーション ==
-== ただのランキングから，マニアックに偏ったオススメまで ==
-
+== 別サーバ上の apache ログをスキャンして、おすすめページを計算する [あとで書く]  ==
+== タグを考慮したレコメンデーション [あとで書く] ==
+== ただのランキングから，マニアックに偏ったオススメまで [あとで書く] ==
+== 「興味がありません」の実装 [あとで書く] ==
+== 古くなったデータを自動的に削除する [あとで書く] ==
+== MySQL をマスターとスレーブに分割する [あとで書く] ==
+== webAPI を使わずに、perlから直接利用する [あとで書く] ==
 
 = EN =
 
