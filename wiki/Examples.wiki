@@ -1,4 +1,4 @@
-#summary configの書き方例 / config examples [not finished]
+#summary cicindelaで出来ることの例 (configの書き方) / config examples (and what you can do with cicindela) [not finished]
 #labels Phase-Implementation
 
 <wiki:toc max_depth="2" />
