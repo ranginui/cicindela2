@@ -12,7 +12,8 @@ Cicindelaが受け取るデータのうち，もっとも基本になるのは�
   * ratings (あるユーザがあるアイテムを選択し、ある点数をつけた、という情報。ユーザが点数を入力することができる場合はこちらのみを使う) 
 
 Id はすべて整数値。従って，cicindela とそれを利用するアプリケーションの間では基本的にidだけがやりとりされるため，シンプルでかつ汎用性が高い。
-(オプションとして，整数以外のユーザid/アイテムidも扱うことはできるが，内部的にはすべて整数idに変換される)
+
+オプションとして，整数以外のユーザid/アイテムidも扱うことができる。この場合は、user_id_char2int, item_id_char2int という変換テーブルによって，入出力の手前で内部id <=> オリジナルid の変換が行われる。
 
 これに加えて，以下の情報も扱うことができる。
   * tagged_relations (あるユーザがあるアイテムに、あるidのタグをつけた、という情報)
@@ -81,10 +82,10 @@ APIで受信した嗜好データは、それぞれ以下のテーブルに格�
 レコメンド出力APIは、Cicindela::Recommender の子クラスのどれかを使って出力される。
 
 例えば Recommender::ItemSimilarities クラスは Filters::ItemSimilarities と対になっており、Filters::ItemSimilarities が書き出した類似度データ (item_similarities_online テーブル) を元に item別のレコメンドを計算する。
-  * user 別のレコメンドは、上記のテーブルの他に picks / ratings テーブルに保存された嗜好データ (もしくは、converted_picks /converted_ratings に保存された正規化ずみ嗜好データ) をくみあわせて計算される。
+ * user 別のレコメンドは、上記のテーブルの他に picks / ratings テーブルに保存された嗜好データ (もしくは、converted_picks /converted_ratings に保存された正規化ずみ嗜好データ) をくみあわせて計算される。
+ * item_to_item, user_to_item, user_to_user は、それぞれ、レコメンダの recommend_for_item(), recommend_for_user(),similar_users() という名前のメソッドを呼び出すことで出力される。レコメンダによってはこれらの一部が実装されていないことがある。
 
-
-=== 現在実装されているフィルタ ===
+=== 現在実装されているフィルタとレコメンダ ===
 
 → [あとで書く]
 
