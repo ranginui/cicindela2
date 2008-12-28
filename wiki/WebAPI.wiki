@@ -165,6 +165,7 @@ Cicindela can make recommendations based on tags. Tag ids should also be integer
 Categories are not much different from tags, except for the following:
  *  A tag involves both an item and an user. Categories are associated with items only.
  *  Some recommenders can take an optional category-id parameter to "limit the recommendations to items of a certain category" or to "limit the recommendations to items which share the same category in common".
+
 {{{
  http://[base_url]/record?set=[set name]&op=set_category&item_id=[item id]&category_id=[category id]
 }}}
@@ -199,13 +200,13 @@ An item can belong to more than one categories.
 Make this request to retrieve a recommendation. A list of recommended ids are returned in the order of relevance, each separated by a new-line.
 
 === item-to-item recommendation ===
-10 recommendations for the specified item are returned by default.
+10 recommended item ids for the specified item are returned by default.
 {{{
  http://[base_url]/recommend?set=[set name]&op=for_item&item_id=[item id]
 }}}
 
 === user-to-item recommendation ===
-20 recommended items for the specified user are returned by default. Items already selected (rated) by the user are excluded from the result.
+20 recommended item ids for the specified user are returned by default. Items already selected (rated) by the user are excluded from the result.
 {{{
  http://[base_url]/recommend?set=[set name]&op=for_user&user_id=[user id]
 }}}
@@ -219,7 +220,7 @@ Make this request to retrieve a recommendation. A list of recommended ids are re
 === rules common to all of the three recommendations ===
 Optionally, following parameters may be available.
  * &limit=maximum number of recommendations
- * &category=category id : some recommenders take this optional parameter, which puts a certain restriction on the result.
+ * &category=category-id : some recommenders take this optional parameter, which puts a certain restriction on the result.
 
 Some recommenders do not support all of the above three recommendations. An empty set is returned on such cases.
 
