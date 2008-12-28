@@ -123,7 +123,7 @@
 
 == Common rules ==
 
- * All ids (user id, item id, etc) are in integers. You should also round them up if the ids have possibilty of going beyond range int(11).
+ * All ids (user id, item id, etc) are in integers. You should also round them up if the ids have possibilty of going beyond the range of int(11).
   * There are options where you can use character user ids and item ids insted of integers.
 
  * Cicindela can handle multiple instances of recommendations, or *sets*. A *set name* is given for each set of calculations, and must be specified in each request.
