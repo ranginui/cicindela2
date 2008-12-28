@@ -173,7 +173,7 @@ An item can belong to more than one categories.
 
 === An user is "not interested" in an item ===
  * The item is excluded from the user's recommendations. This does not have the same effect as making negative ratings. The item is simply filtered out from the result.
- * Avoid using this function if you could use insert_pick / insert_rating instead, as already selected/rated items are exluded from recommendations anyway.
+ * Avoid using this function if you could use insert_pick/insert_rating instead, as already selected/rated items are excluded from recommendations anyway.
  * There is a certain delay until the insert buffer is flushed and the desired exclusion takes effect. Client application should also cache the same information on its own session, if the item should strictly be hidden from the user immediately.
 
 {{{
