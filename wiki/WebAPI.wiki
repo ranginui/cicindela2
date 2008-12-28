@@ -59,6 +59,7 @@
 
 ===「あるユーザがあるアイテムに[興味ありません]マークをつけた」===
  *  単にレコメンド結果から取り除かれるだけで，「マイナスの評価をつける」のと同じではありません。
+ *  レコメンダによってはサポートしていない場合があります。
  * そもそも，レーティング済/選択済のアイテムもおすすめには含まれないので，可能な限りこちらではなく insert_pick/insert_rating の方を使うべきです。
  *  反映されるまでに少しタイムラグがあるので，アプリケーション側でもセッションに情報をもっておいて，表示から隠すなどしたほうがよいでしょう。
 
@@ -173,6 +174,7 @@ An item can belong to more than one categories.
 
 === An user is "not interested" in an item ===
  * The item is excluded from the user's recommendations. This does not have the same effect as making negative ratings. The item is simply filtered out from the result.
+ * Not all recommenders support this functionality.
  * Avoid using this function if you could use insert_pick/insert_rating instead, as already selected/rated items are excluded from recommendations anyway.
  * There is a certain delay until the insert buffer is flushed and the desired exclusion takes effect. Client application should also cache the same information on its own session, if the item should strictly be hidden from the user immediately.
 
