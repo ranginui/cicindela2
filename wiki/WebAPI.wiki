@@ -109,8 +109,8 @@
 === item to item / user to item / user to user に共通の決まりごと ===
 
 上記のパラメータに加えて、以下をオプションで指定することができます。
- * &limit=[件数] : 結果の最大件数を指定できます
- * &category=[カテゴリid] : 使用しているレコメンダによっては、これを指定することでレコメンデーションの範囲を特定のカテゴリに絞ることができます。
+ * &limit=件数 : 結果の最大件数を指定できます
+ * &category=カテゴリid : 使用しているレコメンダによっては、これを指定することでレコメンデーションの範囲を特定のカテゴリに絞ることができます。
 
 レコメンダによっては、上記の三種類のレコメンデーションの一部をサポートしていないことがあります。その場合は常に空のセットが返ります。
 
@@ -218,8 +218,8 @@ Make this request to retrieve a recommendation. A list of recommended ids are re
 
 === rules common to all of the three recommendations ===
 Optionally, following parameters may be available.
- * &limit=[maximum number of recommendations]
- * &category=[category id] : some recommenders take this optional parameter, which puts a certain restriction on the result.
+ * &limit=maximum number of recommendations
+ * &category=category id : some recommenders take this optional parameter, which puts a certain restriction on the result.
 
 Some recommenders do not support all of the above three recommendations. An empty set is returned on such cases.
 
