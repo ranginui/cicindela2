@@ -205,7 +205,7 @@ Make this request to retrieve a recommendation. A list of recommended ids are re
 }}}
 
 === user-to-item recommendation ===
-20 recommended items for the specified user are returned by default. Items already selected (rated) by the user are exluced from the result.
+20 recommended items for the specified user are returned by default. Items already selected (rated) by the user are excluded from the result.
 {{{
  http://[base_url]/recommend?set=[set name]&op=for_user&user_id=[user id]
 }}}
