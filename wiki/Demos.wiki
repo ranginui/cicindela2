@@ -21,9 +21,13 @@ switch に成功すると，misc/clip_data および misc/movielens_data とい�
 === データベース & テーブル作成 ===
 
 cicindela は，集計セット毎に別々のデータベースを利用します。
+
+misc/create_init_sql.pl --db_name=*データベース名*
+
+を叩くと、指定したデータベース名で、cicindela イニシャライズ用のsqlが標準出力に書き出されます。
 例えば作成するデータベース名が cicindela_clip_db ，mysql のパスが /usr/local/mysql/bin/mysql である場合，以下のようにして新規データベースのセットアップができます。
 {{{
- cd misc
+ cd /home/cicindela/misc
  perl create_init_sql.pl --db_name=cicindela_clip_db | /usr/local/mysql/bin/mysql -uroot
 }}}
 
@@ -48,6 +52,12 @@ cicindela は，集計セット毎に別々のデータベースを利用しま�
 などをしといた方がいいかもしれません。
 
 === データのインポート ===
+
+misc/clip_data/importer.pl  --work_dir=*テンポラリディレクトリ*
+
+は、標準入力からライブドアクリップのデータCSV を受け取り、中間ファイルをテンポラリディレクトリに書き出したあと、その中間ファイルを読み込むための sql を標準出力へ書き出します。
+
+以下のようにして、csv.gz ファイルをパースしてデータベースに読み込ませるまでの一連の処理をまとめて実行することができます。
 {{{
  cd misc/clip_data
  gunzip -c ldclip_demo_dataset.csv.gz | perl importer.pl  --work_dir=`pwd` | /usr/local/mysql/bin/mysql -uroot cicindela_clip_db
@@ -55,7 +65,7 @@ cicindela は，集計セット毎に別々のデータベースを利用しま�
 
 ※ローダースクリプトを利用するには perl モジュール Text::CSV_XS が必要です。
 
-※このスクリプトは中間データを work_dir に書き出したあと「load data infile ... 」ステートメントを mysql に渡します。従って，work_dir は mysql ユーザから参照可能である必要があります。
+※このスクリプトは中間データを work_dir に書き出したあと「load data infile ... 」ステートメントを mysql に渡します。従って，work_dir で指定するテンポラリディレクトリは mysql ユーザから参照可能である必要があります。
 
 === 設定 ===
 
