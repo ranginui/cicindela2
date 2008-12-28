@@ -38,7 +38,7 @@
 
 ===「あるユーザがあるアイテムにあるタグをつけた」===
 
-タグベースのレコメンデーションを利用する場合は、以下のリクエストを利用する。(タグベースのレコメンデーションは、tag id を擬似的な user id に見立てて読み込むことで実現される。[Example] などを参照のこと)
+タグベースのレコメンデーションを利用する場合は、以下のリクエストを利用する。(タグベースのレコメンデーションは、tag id を擬似的な user id に見立てて読み込むことで実現される。[Demos], [Examples] などを参照のこと)
 {{{
  http://[base_url]/record?set=[セット名]&op=insert_tag&user_id=[ユーザid]&item_id=[アイテムid]&tag_id=[タグid]
 }}}
@@ -154,7 +154,7 @@ Make this request each time an user rates an item. Rating should also be an inte
 
 === An user has tagged an item ===
 
-Cicindela can make recommendations based on tags. Tag ids should also be integers. (Tag-based recommendation is achieved by assuming tag ids as pseudo user ids. No semantics are taken into concideration. See [Examples] for details)
+Cicindela can make recommendations based on tags. Tag ids should also be integers. (Tag-based recommendation is achieved by assuming tag ids as pseudo user ids. No semantics are taken into concideration. See [Demos] and [Examples] for details)
 {{{
  http://[base_url]/record?set=[set name]&op=insert_tag&user_id=[user id]&item_id=[item id]&tag_id=[tag id]
 }}}
