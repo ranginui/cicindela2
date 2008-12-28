@@ -140,7 +140,7 @@ Make this request each time an user has selected an item (added an item to the b
 {{{
   http://[base_url]/record?set=[set name]&op=insert_pick&user_id=[user id]&item_id=[item id]
 }}}
-* base_url is http://localhost/cicindela by default.
+(base_url is http://localhost/cicindela by default.)
 
 
 === An user has given an item a rating of N ===
@@ -162,7 +162,7 @@ Cicindela can make recommendations based on tags. Tag ids should also be integer
 == Other data manipulations ==
 
 === Associating an item to a category ===
-* Categories are not much different from tags, except for the following:
+Categories are not much different from tags, except for the following:
  *  A tag involves both an item and an user. Categories are associated with items only.
  *  Some recommenders can take an optional category-id parameter to "limit the recommendations to items of a certain category" or to "limit the recommendations to items which share the same category in common".
 {{{
@@ -224,4 +224,3 @@ Optionally, following parameters may be available.
 Some recommenders do not support all of the above three recommendations. An empty set is returned on such cases.
 
 For example, a recommender which works only on an item-to-item similarity matrix does not have the user-to-user recommendation method implemeted, or, does not perform well even if it has. (See [WritingFilters] for more detailed information on recommenders.)
-
