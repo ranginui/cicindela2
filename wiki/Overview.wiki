@@ -68,7 +68,7 @@ Cicindela は、入力データを複数のモジュール (フィルタ) に順
 
 = EN =
 
-== simple & fast web API ==
+== simple web API ==
 
 Cicindela is designed to input/output data via its web API, running on modperl. Data are stored on MySQL and are then periodically updated by calculation batch scripts.
 
@@ -105,10 +105,21 @@ Dealing only with simple integer ids does not mean it has a simple functionality
 
 There are various algorithms to obtain recommendations from huge set of "who selected what"s.
 
-Cicindela performs a set of calculations on its data, passing intermediate result of one analysis module to the next module until all the similarity matrices (or whatever it needs to emit the recommendations in an instant) are ready. Only then, all the necessary tables are swapped with old tables and made on-line.
+Cicindela performs a set of calculations on its data, passing intermediate result of one analysis module to the next module until all the similarity matrices (or whatever it needs to emit the recommendations in one last step) are ready. Only then, all the necessary tables are swapped with old tables and made on-line.
 
 This sequence is called "filter chain", and is built on a highly customizable plugin architecture. What kind of calculations and conversions a module (= filter) does, and how those filters are integrated, is left to your free will. (You don't even have to use this program for making recommendations !)
 
 In addition to the simple "who selected whats" type of data mentioned above, cicindela can also handle data such as ratings, categories and tags.
 
 Please refer to [FilterChain] [Examples] for details (document unfinished...)
+
+== quick, non-locking response ==
+
+Cicindela has a unique, practical design to keep its input/output interface light and fast:
+
+ # On-line tables (tables read by the recommenders) are kept on memory (using MySQL's memory engine).
+ # All anallysis are run in the background. On-line tables are instantly swapped with the new ones, only after all the new results are ready.  This separates the heavy weight analysis process from the input/output API.
+
+You can easily add a recommendation service to an existing web service, without any extra performance disadvantages.
+
+(Response speed depends on how the recommender is implemented. But cicindela basically suites best for situations where you want to keep on updating and at the same time retrieving the data, and can not sacrifice user experience for it)
