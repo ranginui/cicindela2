@@ -16,7 +16,7 @@
 別のディレクトリにチェックアウトした場合や，perl のパスが違う場合は，以下のスクリプトでソースファイル内のハードコード部分を上書き置換することができます。(...もっとマシな方法をそのうち考えたいです。)
 {{{
  cd misc
- perl substitute_project_paths.pl --perl-path=/usr/local/bin/perl --cicindela_home=/where/you/have/checkedout/cicindela
+ perl substitute_project_paths.pl --perl_path=/usr/local/bin/perl --cicindela_home=/where/you/have/checkedout/cicindela
 }}}
 ※以降、 *"/home/cicindela"* はすべて cicindela のチェックアウトディレクトリに置き換えて読み進めて下さい。
 
