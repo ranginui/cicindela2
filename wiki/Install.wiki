@@ -129,7 +129,7 @@ If you happen to have checked out the source code in directories other than '/ho
 The script 'misc/substitute_project_paths.pl' can search and replace all occurences of those paths in-place. (yes, we know it's absurd)
 {{{
  cd misc
- perl substitute_project_paths.pl --perl-path=/usr/local/bin/perl --cicindela_home=/where/you/have/checkedout/cicindela
+ perl substitute_project_paths.pl --perl_path=/usr/local/bin/perl --cicindela_home=/where/you/have/checkedout/cicindela
 }}}
 All occurences of *"/home/cicindela"* in this document should be interpreted as your cicindela's checkout path.
 
